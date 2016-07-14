@@ -25,7 +25,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Koperasi DKB</span></a>
+              <a href="#" class="site_title"><img src="<?php echo base_url();?>assetdata/images/logo2.png" alt="" width="34" height="34"> <span>Koperasi DKB</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -37,25 +37,25 @@
                   <li><a><i class="fa fa-home"></i> Dashboard</a></li>
                   <li><a><i class="fa fa-edit"></i> Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Anggota</a></li>
-                      <li><a href="form_advanced.html">Jenis Simpanan</a></li>
-                      <li><a href="form_validation.html">Unit Kerja</a></li>
-                      <li><a href="form_wizards.html">Jabatan</a></li>
+                      <li><a href="#">Anggota</a></li>
+                      <li><a href="#">Jenis Simpanan</a></li>
+                      <li><a href="#">Unit Kerja</a></li>
+                      <li><a href="#">Jabatan</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-file"></i> Simpanan</a></li>
-                  <li><a><i class="fa fa-clipboard"></i> Pinjaman</a></li>
-                  <li><a><i class="fa fa-money"></i> Angsuran pinjaman</a></li>
+                  <li><a href="#"><i class="fa fa-file"></i> Simpanan</a></li>
+                  <li><a href="#"><i class="fa fa-clipboard"></i> Pinjaman</a></li>
+                  <li><a href="#"><i class="fa fa-money"></i> Angsuran pinjaman</a></li>
                   <li><a><i class="fa fa-briefcase"></i> Laporan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">Laporan Simpanan Anggota</a></li>
-                      <li><a href="media_gallery.html">Laporan Piutang Anggota</a></li>
+                      <li><a href="#">Laporan Simpanan Anggota</a></li>
+                      <li><a href="#">Laporan Piutang Anggota</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-gears"></i> Pengaturan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">Pengurus</a></li>
-                      <li><a href="tables_dynamic.html">User</a></li>
+                      <li><a href="#">Pengurus</a></li>
+                      <li><a href="#">User</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -82,7 +82,7 @@
                 </li>
                 <li class="">
                   <a href="#" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">Administrator
+                    <img src="<?php echo base_url();?>assetdata/images/user.png" alt="">Administrator
                   </a>
                 </li>
               </ul>

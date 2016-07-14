@@ -30,13 +30,9 @@
 									<div class="col-md-7 col-sm-7 col-xs-12">
 										<select class="form-control" name="No_Anggota">
 											<option>--Pilih Anggota--</option>
-											<?php
-												foreach($anggota as $ambilanggota) {
-											?>				
-											<option value="<?php echo $ambilanggota['No_Anggota'];?>">
-											{<?php echo $ambilanggota['No_Anggota'];?>}&nbsp;&nbsp;<?php echo $ambilanggota['Nama_Anggota'];?>
+											<option value="">
 											</option>		
-											<?php } ?>
+											
 										</select>
 									</div>
 								</div>

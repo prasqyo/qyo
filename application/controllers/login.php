@@ -11,7 +11,7 @@ class Login extends CI_Controller
 	}
 
 	public function index(){
-
+		/*
 		if($this->input->post('masuk')){
 
  			$username = $this->input->post('Username');
@@ -30,23 +30,24 @@ class Login extends CI_Controller
  					'Level' => $sql['Level']);
 
  					$this->session->set_userdata($sessiondata);*/
-					
+		/*			
  			}
 
  			redirect(site_url($redirect));
 
- 		}
+ 		}*/
 
  		// mengambil data dari database
  		$this->load->view('head/login/index');
  		$this->load->view('konten/login/index');
+ 		$this->load->view('footer/login/index');
 	}
  
 		
 	public function logout() 
 	{
-		$this->session->sess_destroy();
-		redirect(site_url(''));
+		//$this->session->sess_destroy();
+		redirect(site_url('/'));
 	} 
  
 }
