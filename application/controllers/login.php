@@ -22,14 +22,14 @@ class Login extends CI_Controller
  			$sql = $this->global_model->find_by('user', array('Username' => $username, 'Password' => $passwordhash));
 
  			if($sql == NULL){
- 				$redirect = "";
+ 				$redirect = "/";
  			}else{
- 				$sessiondata = array(
+ 				/*$sessiondata = array(
  					'Nama_Lengkap' => $sql['Nama_Lengkap'],
  					'Username' => $sql['Username'],
  					'Level' => $sql['Level']);
 
- 					$this->session->set_userdata($sessiondata);
+ 					$this->session->set_userdata($sessiondata);*/
 					
  			}
 
