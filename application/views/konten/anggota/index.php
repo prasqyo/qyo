@@ -7,7 +7,7 @@
               <div class="title_right">
                 <div class="form-group pull-right">
                   <div class="input-group">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus-square"></i> Tambah data</button>
+                    <a href="<?php echo base_url();?>index.php/anggota/tambah" class="btn btn-primary"><i class="fa fa-plus-square"></i> Tambah data</a>
                     <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus data</button>
                   </div>
                 </div>
