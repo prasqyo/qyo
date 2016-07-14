@@ -23,7 +23,8 @@
     <link href="<?php echo base_url();?>assetdata/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assetdata/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assetdata/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    
+    <!-- Select2 -->
+    <link href="<?php echo base_url();?>assetdata/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url();?>assetdata/build/css/custom.min.css" rel="stylesheet">
   </head>

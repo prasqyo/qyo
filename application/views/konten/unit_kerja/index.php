@@ -1,7 +1,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Unit kerja <small>List unit kerja</small></h3>
+                <h3>Unit Kerja <small>List unit kerja</small></h3>
               </div>
 
               <div class="title_right">

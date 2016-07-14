@@ -40,7 +40,25 @@
     <script src="<?php echo base_url();?>assetdata/vendors/jszip/dist/jszip.min.js"></script>
     <script src="<?php echo base_url();?>assetdata/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="<?php echo base_url();?>assetdata/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <!-- Select2 -->
+    <script src="<?php echo base_url();?>assetdata/vendors/select2/dist/js/select2.full.min.js"></script>
 
+    <!-- Select2 -->
+    <script>
+      $(document).ready(function() {
+        $(".select2_single").select2({
+          placeholder: "Pilih",
+          allowClear: true
+        });
+        $(".select2_group").select2({});
+        $(".select2_multiple").select2({
+          maximumSelectionLength: 4,
+          placeholder: "With Max Selection limit 4",
+          allowClear: true
+        });
+      });
+    </script>
+    <!-- /Select2 -->
 
     <!-- Datatables -->
     <script>
