@@ -1,20 +1,17 @@
     <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
-
       <div class="login_wrapper">
-        <div class="animate form login_form">
+        <div class="form login_form">
           <section class="login_content">
-            <form>
+            <form method="post" action="">
               <h1>Login</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input name="username" type="text" class="form-control" placeholder="Nama pengguna" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input name="password" type="password" class="form-control" placeholder="Kata sandi" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
+                <input type="submit" name="masuk" class="btn btn-default submit" href="#" value="Log in">
               </div>
 
               <div class="clearfix"></div>

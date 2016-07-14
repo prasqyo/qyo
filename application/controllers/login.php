@@ -11,11 +11,10 @@ class Login extends CI_Controller
 	}
 
 	public function index(){
-		/*
 		if($this->input->post('masuk')){
 
- 			$username = $this->input->post('Username');
- 			$password = $this->input->post('Password');
+ 			$username = $this->input->post('username');
+ 			$password = $this->input->post('password');
  			$passwordhash = md5($password);
  			$redirect = "dashboard";
 
@@ -30,12 +29,12 @@ class Login extends CI_Controller
  					'Level' => $sql['Level']);
 
  					$this->session->set_userdata($sessiondata);*/
-		/*			
+					
  			}
 
  			redirect(site_url($redirect));
 
- 		}*/
+ 		}
 
  		// mengambil data dari database
  		$this->load->view('head/login/index');

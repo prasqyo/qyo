@@ -11,36 +11,17 @@ class Pinjaman extends CI_Controller {
  	}
 
  	public function index(){
-
- 		$data['pinjaman'] = $this->global_model->find_all('pinjaman_header');
  		//load view
  		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/pinjaman/index', $data);
+ 		$this->load->view('konten/pinjaman/index');
  		$this->load->view('footer/dashboard/index');
 
  	}
 
  	public function tambah(){
-		if($this->input->post('pinjamdata')){
-			$data = $this->input->post();
-
-			unset($data['pinjamdata']);
-			$this->global_model->create('pinjaman', $data);
-		}
-		
-		$data['pinjaman'] = $this->global_model->find_all('pinjaman_header');
-		
 		//load database
 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/pinjaman/pinjaman', $data);
+ 		$this->load->view('konten/pinjaman/pinjaman');
  		$this->load->view('footer/dashboard/index');
 	}
-
- 	public function hapus($id){
-		$this->global_model->delete('pinjaman_header', array('Kode_Pinjaman_Header' => $id));
-
-		redirect(site_url('pinjaman'));
-	}
-
-
 }

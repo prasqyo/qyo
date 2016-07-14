@@ -11,37 +11,18 @@ class Angsuran extends CI_Controller {
  	}
 
  	public function index(){
- 		$data['angsuran'] = $this->global_model->find_all('angsuran_pinjam');
-		
  		//load view
  		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/angsuran/index', $data);
+ 		$this->load->view('konten/angsuran/index');
  		$this->load->view('footer/dashboard/index');
 
  	}
 
  	public function tambah(){
-		if($this->input->post('simpandata')){
-			$data = $this->input->post();
-
-			unset($data['simpandata']);
-			$this->global_model->create('simpanan', $data);
-		}
-		
-		$data['simpanan'] = $this->global_model->find_all('simpanan_header');
-		$data['jenis_simpan'] = $this->global_model->find_all('jenis_simpanan');
-		$data['carianggota'] = $this->global_model->find_all('anggota');
-		
 		//load database
 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/simpanan/simpanan', $data);
+ 		$this->load->view('konten/simpanan/simpanan');
  		$this->load->view('footer/dashboard/index');
-	}
-
- 	public function hapus($id){
-		$this->global_model->delete('simpanan', array('Kode_Simpanan_Header' => $id));
-
-		redirect(site_url('simpanan'));
 	}
 
 

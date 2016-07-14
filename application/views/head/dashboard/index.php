@@ -15,6 +15,15 @@
     <link href="<?php echo base_url();?>assetdata/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="<?php echo base_url();?>assetdata/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="<?php echo base_url();?>assetdata/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="<?php echo base_url();?>assetdata/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assetdata/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assetdata/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assetdata/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assetdata/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url();?>assetdata/build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -34,18 +43,18 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Dashboard</a></li>
+                  <li><a href="<?php echo base_url();?>index.php/dashboard"><i class="fa fa-home"></i> Dashboard</a></li>
                   <li><a><i class="fa fa-edit"></i> Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Anggota</a></li>
-                      <li><a href="#">Jenis Simpanan</a></li>
-                      <li><a href="#">Unit Kerja</a></li>
-                      <li><a href="#">Jabatan</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/anggota">Anggota</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/jenis_simpanan">Jenis Simpanan</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/unit_kerja">Unit Kerja</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/jabatan">Jabatan</a></li>
                     </ul>
                   </li>
-                  <li><a href="#"><i class="fa fa-file"></i> Simpanan</a></li>
-                  <li><a href="#"><i class="fa fa-clipboard"></i> Pinjaman</a></li>
-                  <li><a href="#"><i class="fa fa-money"></i> Angsuran pinjaman</a></li>
+                  <li><a href="<?php echo base_url();?>index.php/simpanan"><i class="fa fa-file"></i> Simpanan</a></li>
+                  <li><a href="<?php echo base_url();?>index.php/pinjaman"><i class="fa fa-clipboard"></i> Pinjaman</a></li>
+                  <li><a href="<?php echo base_url();?>index.php/angsuran"><i class="fa fa-money"></i> Angsuran pinjaman</a></li>
                   <li><a><i class="fa fa-briefcase"></i> Laporan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="#">Laporan Simpanan Anggota</a></li>
@@ -54,8 +63,8 @@
                   </li>
                   <li><a><i class="fa fa-gears"></i> Pengaturan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Pengurus</a></li>
-                      <li><a href="#">User</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/pengurus">Pengurus</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/user">User</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -76,7 +85,7 @@
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                  <a href="#" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <a href="<?php echo base_url();?>index.php/login/logout">
                     <i class="fa fa-power-off"></i> Keluar
                   </a>
                 </li>

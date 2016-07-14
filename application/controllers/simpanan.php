@@ -24,21 +24,4 @@ class Simpanan extends CI_Controller {
  		$this->load->view('konten/simpanan/simpanan');
  		$this->load->view('footer/dashboard/index');
 	}
-	
-	public function tambah_detail()
-	{
-		//load database
-		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/simpanan/simpanan', $data2);
- 		$this->load->view('footer/dashboard/index');
-	}
-	
-	
- 	public function hapus($id){
-		$this->global_model->delete('simpanan', array('Kode_Simpanan_Header' => $id));
-
-		redirect(site_url('simpanan'));
-	}
-
-
 }
