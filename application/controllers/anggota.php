@@ -26,4 +26,12 @@ class Anggota extends CI_Controller {
 		
 	}
 
+	public function edit(){
+		//load view
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/anggota/edit');
+ 		$this->load->view('footer/dashboard/index');
+		
+	}
+
 }
