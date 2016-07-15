@@ -9,18 +9,29 @@ class Jenis_simpanan extends CI_Controller {
  		$this->load->helper('url');
  		$this->load->library('session');
  	}
-
+ 	
  	public function index(){
+		//load view
  		$this->load->view('head/dashboard/index');
  		$this->load->view('konten/jenis_simpanan/index');
  		$this->load->view('footer/dashboard/index');
- 	}
 
- 	public function tambah(){
-		//load view
- 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/jenis_simpanan/jenis_simpanan');
- 		$this->load->view('footer/dashboard/index');
  	}
+	
+	public function tambah(){
+		//load view
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/jenis_simpanan/tambah');
+ 		$this->load->view('footer/dashboard/index');
+		
+	}
+
+	public function edit(){
+		//load view
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/jenis_simpanan/edit');
+ 		$this->load->view('footer/dashboard/index');
+		
+	}
 	
 }

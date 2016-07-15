@@ -21,7 +21,16 @@ class User extends CI_Controller {
 	public function tambah(){
 		//load view
 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/user/user');
+ 		$this->load->view('konten/user/tambah');
  		$this->load->view('footer/dashboard/index');
+		
+	}
+
+	public function edit(){
+		//load view
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/user/edit');
+ 		$this->load->view('footer/dashboard/index');
+		
 	}
 }

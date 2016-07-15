@@ -10,19 +10,29 @@ class Jabatan extends CI_Controller {
  		$this->load->library('session');
  	}
 
+ 	
  	public function index(){
- 		//load view
+		//load view
  		$this->load->view('head/dashboard/index');
  		$this->load->view('konten/jabatan/index');
  		$this->load->view('footer/dashboard/index');
 
  	}
-
+	
 	public function tambah(){
- 		//load view
- 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/jabatan/jabatan');
+		//load view
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/jabatan/tambah');
  		$this->load->view('footer/dashboard/index');
- 	}
+		
+	}
+
+	public function edit(){
+		//load view
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/jabatan/edit');
+ 		$this->load->view('footer/dashboard/index');
+		
+	}
 
 }

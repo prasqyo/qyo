@@ -11,17 +11,26 @@ class Unit_kerja extends CI_Controller {
  	}
 
  	public function index(){
- 		//load view
+		//load view
  		$this->load->view('head/dashboard/index');
  		$this->load->view('konten/unit_kerja/index');
  		$this->load->view('footer/dashboard/index');
 
  	}
-
- 	public function tambah(){
+	
+	public function tambah(){
 		//load view
- 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/unit_kerja/unit_kerja');
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/unit_kerja/tambah');
  		$this->load->view('footer/dashboard/index');
- 	}
+		
+	}
+
+	public function edit(){
+		//load view
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/unit_kerja/edit');
+ 		$this->load->view('footer/dashboard/index');
+		
+	}
 }

@@ -11,17 +11,26 @@ class Simpanan extends CI_Controller {
  	}
 
  	public function index(){
- 		//load view
+		//load view
  		$this->load->view('head/dashboard/index');
  		$this->load->view('konten/simpanan/index');
  		$this->load->view('footer/dashboard/index');
 
  	}
-
- 	public function tambah(){
-		//load database
+	
+	public function tambah(){
+		//load view
 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/simpanan/simpanan');
+ 		$this->load->view('konten/simpanan/tambah');
  		$this->load->view('footer/dashboard/index');
+		
+	}
+
+	public function edit(){
+		//load view
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/simpanan/edit');
+ 		$this->load->view('footer/dashboard/index');
+		
 	}
 }

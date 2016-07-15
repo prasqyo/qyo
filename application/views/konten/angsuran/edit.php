@@ -1,7 +1,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Pengurus <small>Ubah pengurus koperasi</small></h3>
+                <h3>Angsuran Peminjaman <small>Ubah angsuran peminjaman</small></h3>
               </div>
             </div>
 

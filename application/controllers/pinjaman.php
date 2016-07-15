@@ -11,17 +11,26 @@ class Pinjaman extends CI_Controller {
  	}
 
  	public function index(){
- 		//load view
+		//load view
  		$this->load->view('head/dashboard/index');
  		$this->load->view('konten/pinjaman/index');
  		$this->load->view('footer/dashboard/index');
 
  	}
-
- 	public function tambah(){
-		//load database
+	
+	public function tambah(){
+		//load view
 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/pinjaman/pinjaman');
+ 		$this->load->view('konten/pinjaman/tambah');
  		$this->load->view('footer/dashboard/index');
+		
+	}
+
+	public function edit(){
+		//load view
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/pinjaman/edit');
+ 		$this->load->view('footer/dashboard/index');
+		
 	}
 }

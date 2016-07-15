@@ -21,7 +21,16 @@ class Pengurus extends CI_Controller {
 	public function tambah(){
 		//load view
 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/pengurus/pengurus');
+ 		$this->load->view('konten/pengurus/tambah');
  		$this->load->view('footer/dashboard/index');
+		
+	}
+
+	public function edit(){
+		//load view
+		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/pengurus/edit');
+ 		$this->load->view('footer/dashboard/index');
+		
 	}
 }
