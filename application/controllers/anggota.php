@@ -11,14 +11,94 @@ class Anggota extends CI_Controller {
  	}
 
  	public function index(){
+ 		$data['anggota'] = $this->global_model->find_all('anggota');
 		//load view
  		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/anggota/index');
+ 		$this->load->view('konten/anggota/index', $data);
  		$this->load->view('footer/dashboard/index');
 
  	}
+
+ 	//fungsi ini untuk generate message
+ 	public function message($mode,$text,$active)
+ 	{
+ 		//generate message
+ 		$messagesession = array(
+ 			'messagemode' => $mode,
+ 			'messagetext' => $text,
+ 			'messageactive' => $active);
+
+ 		$this->session->set_flashdata($messagesession);
+ 	}
 	
 	public function tambah(){
+		if($this->input->post('simpan')){
+
+			/*generate kode anggota */
+ 			$sql = $this->global_model->query("select *from anggota order by No_Anggota desc");
+ 			$kode = "ANG";
+
+ 			if($sql != Null){
+ 				$pisah = explode('-', $sql[0]['No_Anggota']);
+
+ 				$number =  (int) $pisah[1];
+ 				$digit = intval($number) + 1;
+
+ 				if ($digit >= 1 and $digit <= 9){
+					$a = $kode."-00".$digit;
+	 			}else if($digit >= 10 and $digit <= 99){
+	 				$a = $kode."-0".$digit;
+	 			}else{
+	 				$a = $kode."-".$digit;
+	 			}
+
+ 			}else{
+ 				$kodedefault = "ANG-001";
+ 				$a = $kodedefault;
+ 			}
+
+ 			/* akhir generate kode anggota*/
+
+ 			/* generate tanggal input anggota */
+ 			date_default_timezone_set('Asia/Jakarta');
+ 			$getdatetime = date('m/d/Y H:i:s',time());
+
+ 			$pisah = explode(' ',$getdatetime);
+
+ 			list($bulan,$tanggal,$tahun) = explode('/', $pisah[0]);
+
+ 			$tanggalinput = $tahun."-".$bulan."-".$tanggal;
+
+ 			/* akhir generate tanggal input anggota */
+
+ 			//ganti format inputan ke format tanggal database
+ 			list($tanggal,$bulan,$tahun) = explode('/', $this->input->post('Tanggal_Lahir'));
+ 			$tanggallahir = $tahun."-".$bulan."-".$tanggal;
+
+ 			//kumpulkan data yang ada dalam suatu array
+ 			$kumpuldata = array(
+ 				'No_Anggota' => $a,
+ 				'ID_Unit' => $this->input->post('ID_Unit'),
+ 				'NIK' => $this->input->post('NIK'),
+ 				'Nama_Anggota' => $this->input->post('Nama_Anggota'),
+ 				'Tempat' => $this->input->post('Tempat'),
+ 				'Tanggal_Lahir' => $tanggallahir,
+ 				'Tanggal_Masuk_Anggota' => $tanggalinput,
+ 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
+ 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'),
+ 				'Status' => 'Anggota');
+
+ 			//insert kedalam database melalui model
+
+ 			$this->global_model->create('anggota', $kumpuldata);
+
+ 			//memberikan pesan
+ 			$this->message('success','Data berhasil di tambah','tambahanggota');
+
+ 			//redirect setelah sudah tersimpan
+ 			redirect(site_url('anggota/tambah'));
+		}
+
 		//load view
 		$this->load->view('head/dashboard/index');
  		$this->load->view('konten/anggota/tambah');
@@ -26,12 +106,51 @@ class Anggota extends CI_Controller {
 		
 	}
 
-	public function edit(){
+	public function edit($id){
+		if($this->input->post('simpan')){
+				//kumpulkan data yang ada dalam suatu array
+	 			$kumpuldata = array(
+ 				'ID_Unit' => $this->input->post('ID_Unit'),
+ 				'NIK' => $this->input->post('NIK'),
+ 				'Nama_Anggota' => $this->input->post('Nama_Anggota'),
+ 				'Tempat' => $this->input->post('Tempat'),
+ 				'Tanggal_Lahir' => $this->input->post('Tanggal_Lahir'),
+ 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
+ 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'));
+
+ 				var_dump($kumpuldata);
+
+ 			//update ke database
+ 			$this->global_model->update('anggota', $kumpuldata, array('No_Anggota' => $id));
+
+ 			//memberikan pesan
+ 			$this->message('success','Data berhasil di edit','ubahanggota');
+
+ 			//redirect
+ 			redirect(site_url('anggota/edit/'.$id));
+		}
+
+		$data['load'] = $this->global_model->find_by('anggota',array('No_Anggota' => $id));
 		//load view
 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/anggota/edit');
+ 		$this->load->view('konten/anggota/edit',$data);
  		$this->load->view('footer/dashboard/index');
 		
+	}
+
+	public function hapus(){
+		$chkbox = $this->input->post('check');
+	 	if(is_array($chkbox)){
+	 		for($i = 0; $i < count($chkbox); $i++){
+	 			$this->global_model->delete('anggota', array('No_Anggota' => $chkbox[$i]));
+
+	 		}
+	 	}
+
+	 	//memberikan pesan
+ 		$this->message('success','Data berhasil di hapus','indexanggota');
+
+	 	redirect(site_url('anggota'));
 	}
 
 }

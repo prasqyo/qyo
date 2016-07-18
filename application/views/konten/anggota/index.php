@@ -1,7 +1,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Keanggotan <small>List anggota koperasi</small></h3>
+                <h3><a href="<?php echo base_url();?>index.php/anggota">Keanggotan</a> <small>List anggota koperasi</small></h3>
               </div>
 
               <div class="title_right">
@@ -34,18 +34,21 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <?php foreach ($anggota as $fetchdata) {
+                        ?>
                         <tr>
-                          <td><input type="checkbox" name="check[]" value=""></td>
+                          <td><input type="checkbox" name="check[]" value="<?php echo $fetchdata['No_Anggota'];?>"></td>
+                          <td><?php echo $fetchdata['No_Anggota'];?></td>
+                          <td><?php echo $fetchdata['NIK'];?></td>
+                          <td><?php echo $fetchdata['Nama_Anggota'];?></td>
                           <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
+                          <td><?php echo $fetchdata['Tanggal_Masuk_Anggota'];?></td>
                           <td class="text-center">
                             <button type="button" class="btn btn-success btn-xs" data-placement="top" data-toggle="tooltip" title="View" onclick="openmodal('view')"><span class="glyphicon glyphicon-eye-open"></span></button>
-                            <a href="<?php echo base_url();?>index.php/anggota/edit" class="btn btn-default btn-xs" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="<?php echo base_url();?>index.php/anggota/edit/<?php echo $fetchdata['No_Anggota'];?>" class="btn btn-default btn-xs" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
                           </td>
                         </tr>
+                        <?php } ?>
                       </tbody>
                     </table>
                     </form>
@@ -67,7 +70,6 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                       <button type="submit" form="myform" class="btn btn-danger">Hapus</button>
-                      </form>
                     </div>
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -86,13 +88,27 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                       <button type="submit" form="myform" class="btn btn-danger">Hapus</button>
-                      </form>
                     </div>
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 
           </div>
+
+<?php
+if($this->session->flashdata('messagemode','messagetext','messageactive') && $this->session->flashdata('messageactive') == "indexanggota"){
+echo "<script type='text/javascript'>";
+  echo "$(document).ready(function() {";
+    echo "new PNotify({";
+      echo "title: 'Informasi !',";
+      echo "text: '".$this->session->flashdata('messagetext')."',";
+      echo "type: '".$this->session->flashdata('messagemode')."',";
+      echo "styling: 'bootstrap3'";
+    echo "});";
+  echo "});";
+echo "</script>";
+}
+?>
 
 <script type="text/javascript">
 function openmodal(id){
