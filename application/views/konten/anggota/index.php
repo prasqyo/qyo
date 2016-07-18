@@ -36,9 +36,9 @@
                       <tbody>
                         <?php foreach ($anggota as $fetchdata) {
                         ?>
-                        <tr>
+                        <tr class="record">
                           <td><input type="checkbox" name="check[]" value="<?php echo $fetchdata['No_Anggota'];?>"></td>
-                          <td><?php echo $fetchdata['No_Anggota'];?></td>
+                          <td id="kode"><?php echo $fetchdata['No_Anggota'];?></td>
                           <td><?php echo $fetchdata['NIK'];?></td>
                           <td><?php echo $fetchdata['Nama_Anggota'];?></td>
                           <td>-</td>
@@ -51,7 +51,7 @@
                           ?>
                           </td>
                           <td class="text-center">
-                            <button type="button" class="btn btn-success btn-xs" data-placement="top" data-toggle="tooltip" title="View" onclick="openmodal('view')"><span class="glyphicon glyphicon-eye-open"></span></button>
+                            <button type="button" class="viewbutton btn btn-success btn-xs" data-placement="top" data-toggle="tooltip" title="View"><span class="glyphicon glyphicon-eye-open"></span></button>
                             <a href="<?php echo base_url();?>index.php/anggota/edit/<?php echo $fetchdata['No_Anggota'];?>" class="btn btn-default btn-xs" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
                           </td>
                         </tr>
@@ -90,11 +90,47 @@
                       <h4 class="modal-title">View Data</h4>
                     </div>
                     <div class="modal-body">
-                      <p>Apa anda yakin ingin menghapus data tersebut?</p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label>No Anggota</label>
+                              <input type="text" class="form-control" disabled="" id="noview">
+                          </div>
+                          <div class="form-group">
+                              <label>NIK</label>
+                              <input type="text" class="form-control" disabled="" id="nikview">
+                          </div>
+                          <div class="form-group">
+                              <label>Nama Anggota</label>
+                              <input type="text" class="form-control" disabled="" id="namaview">
+                          </div>
+                          <div class="form-group">
+                              <label>Tempat</label>
+                              <input type="text" class="form-control" disabled="" id="tempatview">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Tanggal Lahir</label>
+                              <input type="text" class="form-control" disabled="" id="tanggallahirview">
+                          </div>
+                          <div class="form-group">
+                              <label>Tanggal Masuk Anggota</label>
+                              <input type="text" class="form-control" disabled="" id="tanggalmasukview">
+                          </div>
+                          <div class="form-group">
+                              <label>Jenis Kelamin</label>
+                              <input type="text" class="form-control" disabled="" id="jeniskelaminview">
+                          </div>
+                          <div class="form-group">
+                              <label>Unit Kerja</label>
+                              <input type="text" class="form-control" disabled="" id="unitkerjaview">
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                      <button type="submit" form="myform" class="btn btn-danger">Hapus</button>
                     </div>
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -121,4 +157,23 @@ echo "</script>";
 function openmodal(id){
   $('#'+id).modal('show');
 }
-</script>          
+</script>
+<script type="text/javascript">
+    $(".viewbutton").click(function(event) {
+        var record = $(this).parents('.record');
+
+        $.getJSON('<?php echo base_url(); ?>index.php/anggota/tampil/'+record.find('#kode').html(), function(data) {
+        $("#noview").val(data.No_Anggota);
+        $("#nikview").val(data.NIK);
+        $("#namaview").val(data.Nama_Anggota);
+        $("#tempatview").val(data.Tempat);
+        $("#tanggallahirview").val(data.Tanggal_Lahir);
+        $("#tanggalmasukview").val(data.Tanggal_Masuk_Anggota);
+        $("#jeniskelaminview").val(data.Jenis_Kelamin);
+        $("#unitkerjaview").val(data.Unit_Kerja);
+    });
+
+        $('#view').modal('show');
+    
+    });
+</script>    
