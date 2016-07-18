@@ -74,9 +74,9 @@ class Anggota extends CI_Controller {
  			$tanggallahir = $tahun."-".$bulan."-".$tanggal;
 
  			//variable untuk cek
- 			$listfield = array('NIK','Nama_Anggota');
- 			$listdata = array($this->input->post('NIK'),$this->input->post('Nama_Anggota'));
- 			$listtext = array('NIK','Nama');
+ 			$listfield = array('NIK');
+ 			$listdata = array($this->input->post('NIK'));
+ 			$listtext = array('NIK');
 
  			//variable untuk message error
  			$texterror = "";
@@ -110,7 +110,6 @@ class Anggota extends CI_Controller {
 		 				'Status' => 'Anggota');
 
 		 			//insert kedalam database melalui model
-
 		 			$this->global_model->create('anggota', $kumpuldata);
 
 		 			//memberikan pesan
@@ -131,23 +130,38 @@ class Anggota extends CI_Controller {
 
 	public function edit($id){
 		if($this->input->post('simpan')){
-				//kumpulkan data yang ada dalam suatu array
-	 			$kumpuldata = array(
- 				'ID_Unit' => $this->input->post('ID_Unit'),
- 				'NIK' => $this->input->post('NIK'),
- 				'Nama_Anggota' => $this->input->post('Nama_Anggota'),
- 				'Tempat' => $this->input->post('Tempat'),
- 				'Tanggal_Lahir' => $this->input->post('Tanggal_Lahir'),
- 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
- 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'));
 
- 				var_dump($kumpuldata);
+			//ganti format inputan ke format tanggal database
+ 			list($tanggal,$bulan,$tahun) = explode('/', $this->input->post('Tanggal_Lahir'));
+ 			$tanggallahir = $tahun."-".$bulan."-".$tanggal;
 
- 			//update ke database
- 			$this->global_model->update('anggota', $kumpuldata, array('No_Anggota' => $id));
+			//select data berdasarkan id data
+			$getdata = $this->global_model->find_by('anggota', array('No_Anggota' => $id));
+ 			if($this->input->post('NIK')=="" && $this->input->post('Nama_Anggota')==""){
+ 				$this->message('error','NIK atau Nama anggota tidak boleh kosong','ubahanggota');
+ 			}else{
+ 				//cek data sama atau tidak
+ 				$sql = $this->global_model->find_all_by('anggota', array('NIK' => $this->input->post('NIK')));
+ 				if(count($sql) > 0 && $this->input->post('NIK') != $getdata['NIK']){
+ 					$this->message('error','NIK anggota sudah ada','ubahanggota');
+ 				}else{
+ 					//kumpulkan data yang ada dalam suatu array
+		 			$kumpuldata = array(
+	 				'ID_Unit' => $this->input->post('ID_Unit'),
+	 				'NIK' => $this->input->post('NIK'),
+	 				'Nama_Anggota' => $this->input->post('Nama_Anggota'),
+	 				'Tempat' => $this->input->post('Tempat'),
+	 				'Tanggal_Lahir' => $tanggallahir,
+	 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
+	 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'));
 
- 			//memberikan pesan
- 			$this->message('success','Data berhasil di edit','ubahanggota');
+	 				//update ke database
+		 			$this->global_model->update('anggota', $kumpuldata, array('No_Anggota' => $id));
+
+		 			//memberikan pesan
+		 			$this->message('success','Data berhasil di edit','ubahanggota');
+ 				}
+ 			}
 
  			//redirect
  			redirect(site_url('anggota/edit/'.$id));
