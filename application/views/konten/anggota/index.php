@@ -131,6 +131,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                      <a href="<?php echo base_url();?>index.php/anggota/cetak" target="_blank" class="btn btn-primary">Cetak</a>
                     </div>
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
