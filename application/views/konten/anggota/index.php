@@ -42,7 +42,14 @@
                           <td><?php echo $fetchdata['NIK'];?></td>
                           <td><?php echo $fetchdata['Nama_Anggota'];?></td>
                           <td>-</td>
-                          <td><?php echo $fetchdata['Tanggal_Masuk_Anggota'];?></td>
+                          <td>
+                          <?php
+                            $get = $fetchdata['Tanggal_Masuk_Anggota'];
+                            list($tahun,$bulan,$tanggal) = explode('-', $get);
+                            $a = $tanggal."/".$bulan."/".$tahun;
+                            echo $a;
+                          ?>
+                          </td>
                           <td class="text-center">
                             <button type="button" class="btn btn-success btn-xs" data-placement="top" data-toggle="tooltip" title="View" onclick="openmodal('view')"><span class="glyphicon glyphicon-eye-open"></span></button>
                             <a href="<?php echo base_url();?>index.php/anggota/edit/<?php echo $fetchdata['No_Anggota'];?>" class="btn btn-default btn-xs" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>

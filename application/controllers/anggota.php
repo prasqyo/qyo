@@ -56,7 +56,6 @@ class Anggota extends CI_Controller {
  				$kodedefault = "ANG-001";
  				$a = $kodedefault;
  			}
-
  			/* akhir generate kode anggota*/
 
  			/* generate tanggal input anggota */
@@ -68,32 +67,56 @@ class Anggota extends CI_Controller {
  			list($bulan,$tanggal,$tahun) = explode('/', $pisah[0]);
 
  			$tanggalinput = $tahun."-".$bulan."-".$tanggal;
-
  			/* akhir generate tanggal input anggota */
 
  			//ganti format inputan ke format tanggal database
  			list($tanggal,$bulan,$tahun) = explode('/', $this->input->post('Tanggal_Lahir'));
  			$tanggallahir = $tahun."-".$bulan."-".$tanggal;
 
- 			//kumpulkan data yang ada dalam suatu array
- 			$kumpuldata = array(
- 				'No_Anggota' => $a,
- 				'ID_Unit' => $this->input->post('ID_Unit'),
- 				'NIK' => $this->input->post('NIK'),
- 				'Nama_Anggota' => $this->input->post('Nama_Anggota'),
- 				'Tempat' => $this->input->post('Tempat'),
- 				'Tanggal_Lahir' => $tanggallahir,
- 				'Tanggal_Masuk_Anggota' => $tanggalinput,
- 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
- 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'),
- 				'Status' => 'Anggota');
+ 			//variable untuk cek
+ 			$listfield = array('NIK','Nama_Anggota');
+ 			$listdata = array($this->input->post('NIK'),$this->input->post('Nama_Anggota'));
+ 			$listtext = array('NIK','Nama');
 
- 			//insert kedalam database melalui model
+ 			//variable untuk message error
+ 			$texterror = "";
 
- 			$this->global_model->create('anggota', $kumpuldata);
+ 			if($this->input->post('NIK')=="" && $this->input->post('Nama_Anggota')==""){
+ 				$this->message('error','NIK atau Nama anggota tidak boleh kosong','tambahanggota');
+ 			}else{
+ 				//cek data sama atau tidak
+ 				for($i = 0; $i < count($listfield); $i++){
+ 					$sql = $this->global_model->find_all_by('anggota', array($listfield[$i] => $listdata[$i]));
+ 					if(count($sql) > 0){
+ 						$texterror = $texterror." ".$listtext[$i];
+ 					}
+ 				}
 
- 			//memberikan pesan
- 			$this->message('success','Data berhasil di tambah','tambahanggota');
+ 				if($texterror != ""){
+ 					$this->message('error',$texterror.' anggota sudah ada','tambahanggota');
+
+ 				}else if($texterror == ""){
+ 					//kumpulkan data yang ada dalam suatu array
+		 			$kumpuldata = array(
+		 				'No_Anggota' => $a,
+		 				'ID_Unit' => $this->input->post('ID_Unit'),
+		 				'NIK' => $this->input->post('NIK'),
+		 				'Nama_Anggota' => $this->input->post('Nama_Anggota'),
+		 				'Tempat' => $this->input->post('Tempat'),
+		 				'Tanggal_Lahir' => $tanggallahir,
+		 				'Tanggal_Masuk_Anggota' => $tanggalinput,
+		 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
+		 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'),
+		 				'Status' => 'Anggota');
+
+		 			//insert kedalam database melalui model
+
+		 			$this->global_model->create('anggota', $kumpuldata);
+
+		 			//memberikan pesan
+		 			$this->message('success','Data berhasil di tambah','tambahanggota');
+ 				}
+ 			}
 
  			//redirect setelah sudah tersimpan
  			redirect(site_url('anggota/tambah'));

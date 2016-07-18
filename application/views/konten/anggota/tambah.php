@@ -28,13 +28,13 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Tempat</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="Tempat" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" name="Tempat" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Lahir</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="Tanggal_Lahir" class="form-control" data-inputmask="'mask': '99/99/9999'">
+                          <input type="text" name="Tanggal_Lahir" class="form-control" data-inputmask="'mask': '99/99/9999'" required>
                           <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                         </div>
                       </div>
