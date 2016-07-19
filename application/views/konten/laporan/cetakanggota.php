@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Invoice</title>
+    <title>Koperasi DKB | Cetak data anggota</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -39,37 +39,37 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>No Anggota</label>
-              <p class="lead">ANG-001</p>
+              <p class="lead"><?php echo $load['No_Anggota']; ?></p>
             </div><!-- /.form-group -->
             <div class="form-group">
               <label>NIK</label>
-              <p class="lead">201543501315</p>
+              <p class="lead"><?php echo $load['NIK']; ?></p>
             </div><!-- /.form-group -->
             <div class="form-group">
               <label>Nama Anggota</label>
-              <p class="lead">Gunawan puspo prajoko</p>
+              <p class="lead"><?php echo $load['Nama_Anggota']; ?></p>
             </div><!-- /.form-group -->
             <div class="form-group">
               <label>Tempat, Tanggal Lahir</label>
-              <p class="lead">Jakarta, 21/05/1997</p>
+              <p class="lead"><?php echo $load['Tempat'].", ".$load['Tanggal_Lahir']; ?></p>
             </div><!-- /.form-group -->
             <div class="form-group">
               <label>Jenis Kelamin</label>
-              <p class="lead">Pria</p>
+              <p class="lead"><?php echo $load['Jenis_Kelamin']; ?></p>
             </div><!-- /.form-group -->
           </div><!-- /.col -->
           <div class="col-md-6">
             <div class="form-group">
               <label>Tanggal Bergabung</label>
-              <p class="lead">21/05/1997</p>
+              <p class="lead"><?php echo $load['Tanggal_Masuk_Anggota']; ?></p>
             </div><!-- /.form-group -->
             <div class="form-group">
               <label>Unit Kerja</label>
-              <p class="lead">Galangan I</p>
+              <p class="lead"><?php echo $load['ID_Unit']; ?></p>
             </div><!-- /.form-group -->
             <div class="form-group">
               <label>Alamat Rumah</label>
-              <p class="lead">Jalan condet batu ampar RT015/002 No 70 Kel. Batu Ampar Kec. Kramatjati Jakarta Timur</p>
+              <p class="lead"><?php echo $load['Alamat_Rumah']; ?></p>
             </div><!-- /.form-group -->
           </div><!-- /.col -->
         </div>

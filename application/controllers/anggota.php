@@ -202,8 +202,18 @@ class Anggota extends CI_Controller {
  		echo json_encode($sql);
  	}
 
- 	public function cetak(){
- 		$this->load->view('konten/laporan/cetakanggota');
+ 	public function cetak($id){
+ 		$sql = $this->global_model->find_by('anggota', array('No_Anggota' => $id));
+
+ 		$a = $sql['Tanggal_Lahir'];
+ 		list($tahun,$bulan,$tanggal) = explode('-', $a);
+ 		$sql['Tanggal_Lahir'] = $tanggal."/".$bulan."/".$tahun;
+ 		$b = $sql['Tanggal_Masuk_Anggota'];
+ 		list($tahun2,$bulan2,$tanggal2) = explode('-', $b);
+ 		$sql['Tanggal_Masuk_Anggota'] = $tanggal2."/".$bulan2."/".$tahun2;
+
+ 		$data['load'] = $sql;
+ 		$this->load->view('konten/laporan/cetakanggota', $data);
  	}
 
 }

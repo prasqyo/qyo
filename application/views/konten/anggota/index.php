@@ -131,7 +131,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                      <a href="<?php echo base_url();?>index.php/anggota/cetak" target="_blank" class="btn btn-primary">Cetak</a>
+                      <a id="link" target="_blank" class="btn btn-primary">Cetak</a>
                     </div>
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -172,9 +172,11 @@ function openmodal(id){
         $("#tanggalmasukview").val(data.Tanggal_Masuk_Anggota);
         $("#jeniskelaminview").val(data.Jenis_Kelamin);
         $("#unitkerjaview").val(data.Unit_Kerja);
+        $("#link").attr("href", "<?php echo base_url(); ?>index.php/anggota/cetak/"+record.find('#kode').html());
     });
 
         $('#view').modal('show');
     
     });
+
 </script>    
