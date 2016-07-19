@@ -1,13 +1,13 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Unit Kerja <small>List unit kerja</small></h3>
+                <h3><a href="<?php echo base_url();?>index.php/unit_kerja">Unit Kerja</a> <small>List unit kerja</small></h3>
               </div>
 
               <div class="title_right">
                 <div class="form-group pull-right">
                   <div class="input-group">
-                    <a href="<?php echo base_url();?>index.php/unit_kerja/tambah" class="btn btn-primary"><i class="fa fa-plus-square"></i> Tambah data</a>
+                    <button class="tambahbutton btn btn-primary" onclick="openmodal('tambah')"><i class="fa fa-plus"></i> Tambah data</button>
                     <button class="btn btn-danger" onclick="openmodal('hapus')"><i class="fa fa-trash"></i> Hapus data</button>
                   </div>
                 </div>
@@ -25,27 +25,23 @@
                       <thead>
                         <tr>
                           <th width="20"><input type="checkbox" onclick="for(c in document.getElementsByName('check[]')) document.getElementsByName('check[]').item(c).checked =  this.checked"></th>
-                          <th>Kode Anggota</th>
-                          <th>NIK</th>
-                          <th>Nama Anggota</th>
-                          <th>Unit Kerja</th>
-                          <th>Tanggal Bergabung</th>
+                          <th>Kode Unit</th>
+                          <th>Nama Unit</th>
                           <th class="text-center">Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td><input type="checkbox" name="check[]" value=""></td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
+                        <?php foreach ($unitkerja as $fetchdata) {
+                        ?>
+                        <tr class="record">
+                          <td><input type="checkbox" name="check[]" value="<?php echo $fetchdata['ID_Unit'];?>"></td>
+                          <td id="kode"><?php echo $fetchdata['ID_Unit'];?></td>
+                          <td><?php echo $fetchdata['Unit_Kerja'];?></td>
                           <td class="text-center">
-                            <button type="button" class="btn btn-success btn-xs" data-placement="top" data-toggle="tooltip" title="View" onclick="openmodal('view')"><span class="glyphicon glyphicon-eye-open"></span></button>
-                            <a href="<?php echo base_url();?>index.php/unit_kerja/edit" class="btn btn-default btn-xs" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <button type="button" class="editbutton btn btn-default btn-xs" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></button>
                           </td>
                         </tr>
+                        <?php } ?>
                       </tbody>
                     </table>
                     </form>
@@ -67,35 +63,103 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                       <button type="submit" form="myform" class="btn btn-danger">Hapus</button>
-                      </form>
                     </div>
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 
-            <div class="modal fade" id="view">
-                <div class="modal-dialog">
+            <div class="modal fade" id="tambah">
+                <div class="modal-dialog modal-sm">
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title">View Data</h4>
                     </div>
+                    <form method="post" action="<?php echo base_url();?>index.php/unit_kerja/tambah">
                     <div class="modal-body">
-                      <p>Apa anda yakin ingin menghapus data tersebut?</p>
+                      <div class="form-group">
+                        <label>Kode Unit</label>
+                        <input type="text" name="ID_Unit" class="form-control" id="kodetambah">
+                      </div>
+                      <div class="form-group">
+                        <label>Nama Unit</label>
+                        <input type="text" name="Unit_Kerja" class="form-control" id="namatambah">
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                      <button type="submit" form="myform" class="btn btn-danger">Hapus</button>
-                      </form>
+                      <input type="submit" class="btn btn-primary" name="simpan" value="Simpan">
                     </div>
+                    </form>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <div class="modal fade" id="edit">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">View Data</h4>
+                    </div>
+                    <form method="post" id="editform">
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label>Kode Unit</label>
+                        <input type="text" name="ID_Unit" class="form-control" id="kodeedit">
+                      </div>
+                      <div class="form-group">
+                        <label>Nama Unit</label>
+                        <input type="text" name="Unit_Kerja" class="form-control" id="namaedit">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                      <input type="submit" class="btn btn-primary" name="simpan" value="Edit">
+                    </div>
+                    </form>
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 
           </div>
 
+<?php
+if($this->session->flashdata('messagemode','messagetext','messageactive') && $this->session->flashdata('messageactive') == "indexunitkerja"){
+echo "<script type='text/javascript'>";
+  echo "$(document).ready(function() {";
+    echo "new PNotify({";
+      echo "title: 'Informasi !',";
+      echo "text: '".$this->session->flashdata('messagetext')."',";
+      echo "type: '".$this->session->flashdata('messagemode')."',";
+      echo "styling: 'bootstrap3'";
+    echo "});";
+  echo "});";
+echo "</script>";
+}
+?>
+
 <script type="text/javascript">
 function openmodal(id){
   $('#'+id).modal('show');
 }
-</script>          
+</script>
+<script type="text/javascript">
+    $(".editbutton").click(function(event) {
+        var record = $(this).parents('.record');
+
+        $.getJSON('<?php echo base_url(); ?>index.php/unit_kerja/tampil/'+record.find('#kode').html(), function(data) {
+        $("#kodeedit").val(data.ID_Unit);
+        $("#namaedit").val(data.Unit_Kerja);
+        $("#editform").attr("action", "<?php echo base_url(); ?>/index.php/unit_kerja/edit/"+record.find('#kode').html());
+    });
+
+        $('#edit').modal('show');
+    
+    });
+
+    $(".tambahbutton").click(function(event) {
+        $("#kodetambah").val('');
+        $("#namatambah").val('');
+    });
+</script>
