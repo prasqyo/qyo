@@ -73,14 +73,10 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">View Data</h4>
+                      <h4 class="modal-title">Tambah Data</h4>
                     </div>
                     <form method="post" action="<?php echo base_url();?>index.php/unit_kerja/tambah">
                     <div class="modal-body">
-                      <div class="form-group">
-                        <label>Kode Unit</label>
-                        <input type="text" name="ID_Unit" class="form-control" id="kodetambah">
-                      </div>
                       <div class="form-group">
                         <label>Nama Unit</label>
                         <input type="text" name="Unit_Kerja" class="form-control" id="namatambah">
@@ -100,14 +96,10 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">View Data</h4>
+                      <h4 class="modal-title">Edit Data</h4>
                     </div>
                     <form method="post" id="editform">
                     <div class="modal-body">
-                      <div class="form-group">
-                        <label>Kode Unit</label>
-                        <input type="text" name="ID_Unit" class="form-control" id="kodeedit">
-                      </div>
                       <div class="form-group">
                         <label>Nama Unit</label>
                         <input type="text" name="Unit_Kerja" class="form-control" id="namaedit">
@@ -149,7 +141,6 @@ function openmodal(id){
         var record = $(this).parents('.record');
 
         $.getJSON('<?php echo base_url(); ?>index.php/unit_kerja/tampil/'+record.find('#kode').html(), function(data) {
-        $("#kodeedit").val(data.ID_Unit);
         $("#namaedit").val(data.Unit_Kerja);
         $("#editform").attr("action", "<?php echo base_url(); ?>/index.php/unit_kerja/edit/"+record.find('#kode').html());
     });
@@ -159,7 +150,6 @@ function openmodal(id){
     });
 
     $(".tambahbutton").click(function(event) {
-        $("#kodetambah").val('');
         $("#namatambah").val('');
     });
 </script>
