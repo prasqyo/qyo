@@ -56,10 +56,27 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="select2_single form-control" name="ID_Unit" tabindex="-1" required>
                             <option></option>
-                            <option value="AK">Alaska</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="CA">California</option>
+                            <?php
+                              foreach ($unitkerja as $loadaja) {
+                            ?>
+                            <option value="<?php echo $loadaja['ID_Unit'];?>"><?php echo $loadaja['Unit_Kerja'];?></option>
+                            <?php }?>
                           </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Simpanan Sukarela</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="form-control" name="simpansukarela" tabindex="-1" required id="simpansukarela" onchange="checknominal(this.value)">
+                            <option value="iya">Iya</option>
+                            <option value="tidak">Tidak</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nominal</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="nominal" class="form-control col-md-7 col-xs-12" id="nominal" onkeypress="return isNumberKey(event)">
                         </div>
                       </div>
                       <div class="form-group">
@@ -97,3 +114,19 @@ echo "<script type='text/javascript'>";
 echo "</script>";
 }
 ?>
+<script type="text/javascript">
+  function checknominal(str){
+    if(str == "iya"){
+      document.getElementById("nominal").disabled = false;
+    }else{
+      document.getElementById("nominal").disabled = true;
+      document.getElementById("nominal").value = 0;
+    }
+  }
+  function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+  }
+</script>

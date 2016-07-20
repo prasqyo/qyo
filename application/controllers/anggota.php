@@ -96,6 +96,12 @@ class Anggota extends CI_Controller {
  					$this->message('error',$texterror.' anggota sudah ada','tambahanggota');
 
  				}else if($texterror == ""){
+ 					$nominal = 0;
+ 					if($this->input->post('simpansukarela')=="iya"){
+ 						if($this->input->post('nominal') != ""){
+ 							$nominal = $this->input->post('nominal');
+ 						}
+ 					}
  					//kumpulkan data yang ada dalam suatu array
 		 			$kumpuldata = array(
 		 				'No_Anggota' => $a,
@@ -107,7 +113,9 @@ class Anggota extends CI_Controller {
 		 				'Tanggal_Masuk_Anggota' => $tanggalinput,
 		 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
 		 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'),
-		 				'Status' => 'Anggota');
+		 				'Status' => 'Anggota',
+		 				'simpansukarela' => $this->input->post('simpansukarela'),
+		 				'nominal' => $nominal);
 
 		 			//insert kedalam database melalui model
 		 			$this->global_model->create('anggota', $kumpuldata);
@@ -122,8 +130,9 @@ class Anggota extends CI_Controller {
 		}
 
 		//load view
+		$data['unitkerja'] = $this->global_model->find_all('unit_kerja');
 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/anggota/tambah');
+ 		$this->load->view('konten/anggota/tambah', $data);
  		$this->load->view('footer/dashboard/index');
 		
 	}
@@ -145,6 +154,12 @@ class Anggota extends CI_Controller {
  				if(count($sql) > 0 && $this->input->post('NIK') != $getdata['NIK']){
  					$this->message('error','NIK anggota sudah ada','ubahanggota');
  				}else{
+ 					$nominal = 0;
+ 					if($this->input->post('simpansukarela')=="iya"){
+ 						if($this->input->post('nominal') != ""){
+ 							$nominal = $this->input->post('nominal');
+ 						}
+ 					}
  					//kumpulkan data yang ada dalam suatu array
 		 			$kumpuldata = array(
 	 				'ID_Unit' => $this->input->post('ID_Unit'),
@@ -153,7 +168,9 @@ class Anggota extends CI_Controller {
 	 				'Tempat' => $this->input->post('Tempat'),
 	 				'Tanggal_Lahir' => $tanggallahir,
 	 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
-	 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'));
+	 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'),
+		 			'simpansukarela' => $this->input->post('simpansukarela'),
+		 			'nominal' => $nominal);
 
 	 				//update ke database
 		 			$this->global_model->update('anggota', $kumpuldata, array('No_Anggota' => $id));
@@ -168,6 +185,7 @@ class Anggota extends CI_Controller {
 		}
 
 		$data['load'] = $this->global_model->find_by('anggota',array('No_Anggota' => $id));
+		$data['unitkerja'] = $this->global_model->find_all('unit_kerja');
 		//load view
 		$this->load->view('head/dashboard/index');
  		$this->load->view('konten/anggota/edit',$data);
@@ -199,6 +217,11 @@ class Anggota extends CI_Controller {
  		$b = $sql['Tanggal_Masuk_Anggota'];
  		list($tahun2,$bulan2,$tanggal2) = explode('-', $b);
  		$sql['Tanggal_Masuk_Anggota'] = $tanggal2."/".$bulan2."/".$tahun2;
+
+ 		$c = $sql['ID_Unit'];
+ 		$check = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $c));
+ 		$sql['ID_Unit'] = $check['Unit_Kerja'];
+
  		echo json_encode($sql);
  	}
 

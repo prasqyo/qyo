@@ -54,12 +54,17 @@
                   <li><a><i class="fa fa-edit"></i> Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>index.php/anggota">Anggota</a></li>
-                      <li><a href="<?php echo base_url();?>index.php/jenis_simpanan">Jenis Simpanan</a></li>
                       <li><a href="<?php echo base_url();?>index.php/unit_kerja">Unit Kerja</a></li>
                       <li><a href="<?php echo base_url();?>index.php/jabatan">Jabatan</a></li>
                     </ul>
                   </li>
-                  <li><a href="<?php echo base_url();?>index.php/simpanan"><i class="fa fa-file"></i> Simpanan</a></li>
+                  <li><a><i class="fa fa-file"></i> Simpanan <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo base_url();?>index.php/simpananwajib">Simpanan Wajib</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/simpananpokok">Simpanan Pokok</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/simpanansukarela">Simpanan Sukarela</a></li>
+                    </ul>
+                  </li>
                   <li><a href="<?php echo base_url();?>index.php/pinjaman"><i class="fa fa-clipboard"></i> Pinjaman</a></li>
                   <li><a href="<?php echo base_url();?>index.php/angsuran"><i class="fa fa-money"></i> Angsuran pinjaman</a></li>
                   <li><a><i class="fa fa-briefcase"></i> Laporan <span class="fa fa-chevron-down"></span></a>

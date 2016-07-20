@@ -64,10 +64,25 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="select2_single form-control" tabindex="-1" name="ID_Unit" required>
                             <option></option>
-                            <option value="AK" <?php if($load['ID_Unit']=="AK"){ echo "selected"; } ?>>Alaska</option>
-                            <option value="HI" <?php if($load['ID_Unit']=="HI"){ echo "selected"; } ?>>Hawaii</option>
-                            <option value="CA" <?php if($load['ID_Unit']=="CA"){ echo "selected"; } ?>>California</option>
+                            <?php foreach ($unitkerja as $loadunit) {?>
+                            <option value="<?php echo $loadunit['ID_Unit']; ?>" <?php if($load['ID_Unit']==$loadunit['ID_Unit']){ echo "selected"; } ?>><?php echo $loadunit['Unit_Kerja']; ?></option>
+                            <?php }?>
                           </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Simpanan Sukarela</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="form-control" name="simpansukarela" tabindex="-1" required id="simpansukarela" onchange="checknominal(this.value)">
+                            <option value="iya" <?php if($load['simpansukarela']=="iya"){ echo "selected"; } ?> >Iya</option>
+                            <option value="tidak" <?php if($load['simpansukarela']=="tidak"){ echo "selected"; } ?> >Tidak</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nominal</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="nominal" class="form-control col-md-7 col-xs-12" id="nominal" onkeypress="return isNumberKey(event)" value="<?php echo $load['nominal']; ?>" <?php if($load['simpansukarela'] == "tidak"){ echo "disabled"; } ?>>
                         </div>
                       </div>
                       <div class="form-group">
@@ -105,3 +120,19 @@ echo "<script type='text/javascript'>";
 echo "</script>";
 }
 ?>
+<script type="text/javascript">
+  function checknominal(str){
+    if(str == "iya"){
+      document.getElementById("nominal").disabled = false;
+    }else{
+      document.getElementById("nominal").disabled = true;
+      document.getElementById("nominal").value = 0;
+    }
+  }
+  function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+  }
+</script>

@@ -41,7 +41,13 @@
                           <td id="kode"><?php echo $fetchdata['No_Anggota'];?></td>
                           <td><?php echo $fetchdata['NIK'];?></td>
                           <td><?php echo $fetchdata['Nama_Anggota'];?></td>
-                          <td>-</td>
+                          <td>
+                            <?php 
+                              $c = $fetchdata['ID_Unit'];
+                              $checkcuyy = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $c));
+                              echo $checkcuyy['Unit_Kerja'];
+                            ?>
+                          </td>
                           <td>
                           <?php
                             $get = $fetchdata['Tanggal_Masuk_Anggota'];
@@ -171,7 +177,7 @@ function openmodal(id){
         $("#tanggallahirview").val(data.Tanggal_Lahir);
         $("#tanggalmasukview").val(data.Tanggal_Masuk_Anggota);
         $("#jeniskelaminview").val(data.Jenis_Kelamin);
-        $("#unitkerjaview").val(data.Unit_Kerja);
+        $("#unitkerjaview").val(data.ID_Unit);
         $("#link").attr("href", "<?php echo base_url(); ?>index.php/anggota/cetak/"+record.find('#kode').html());
     });
 
