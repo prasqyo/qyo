@@ -28,12 +28,13 @@
         <div class="row">
           <div class="col-xs-12">
             <h2 class="page-header">
-              <img src="<?php echo base_url();?>assetdata/images/logo2.png" alt="" width="24" height="24">  Detail Transaksi
+              <img src="<?php echo base_url();?>assetdata/images/logo2.png" alt="" width="24" height="24">  Koperasi DKB
               <small class="pull-right">Date: <?php date_default_timezone_set('Asia/Jakarta');
       $getdatetime = date('m/d/Y'); echo $getdatetime; ?></small>
             </h2>
           </div><!-- /.col -->
         </div>
+        <p class="lead">Detail Transaksi Simpanan Sukarela</p>
         <!-- info row -->
         <div class="row invoice-info">
           <div class="col-sm-12 invoice-col">

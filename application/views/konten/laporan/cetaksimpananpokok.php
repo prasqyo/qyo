@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Koperasi DKB | Cetak simpanan wajib</title>
+    <title>Koperasi DKB | Cetak simpanan pokok</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -34,40 +34,7 @@
             </h2>
           </div><!-- /.col -->
         </div>
-        <p class="lead">Detail Transaksi Simpanan Wajib</p>
-        <!-- info row -->
-        <div class="row invoice-info">
-          <div class="col-sm-12 invoice-col">
-          <table>
-            <tr>
-              <td width="180">Nomer Anggota</td>
-              <td width="40" class="text-center">:</td>
-              <td width="200"><?php echo $noanggota; ?></td>
-            </tr>
-            <tr>
-              <td width="180">NIK</td>
-              <td width="40" class="text-center">:</td>
-              <td width="200"><?php echo $nik; ?></td>
-            </tr>
-            <tr>
-              <td width="180">Nama Anggota</td>
-              <td width="40" class="text-center">:</td>
-              <td width="200"><?php echo $namaanggota; ?></td>
-            </tr>
-            <tr>
-              <td width="180">Unit Kerja</td>
-              <td width="40" class="text-center">:</td>
-              <td width="200"><?php echo $unit; ?></td>
-            </tr>
-            <tr>
-              <td width="180">Jenis Simpanan</td>
-              <td width="40" class="text-center">:</td>
-              <td width="200">Simpanan Wajib</td>
-            </tr>
-          </table>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-        <br/>
+        <p class="lead">Detail Transaksi Simpanan Pokok</p>
         <!-- Table row -->
         <div class="row">
           <div class="col-xs-12 table-responsive">
@@ -76,8 +43,8 @@
                 <tr>
                   <th>No</th>
                   <th>Kode Transaksi</th>
-                  <th>Bulan</th>
-                  <th>Tahun</th>
+                  <th>Nomer Anggota</th>
+                  <th>Nama Anggota</th>
                   <th>Nominal</th>
                   <th>Tanggal Transaksi</th>
                 </tr>
@@ -91,8 +58,14 @@
                 <tr>
                   <td><?php echo $no;?></td>
                   <td><?php echo $fetchdata['kode_transaksi'];?></td>
-                  <td><?php echo $fetchdata['Bulan'];?></td>
-                  <td><?php echo $fetchdata['Tahun'];?></td>
+                  <td><?php echo $fetchdata['No_Anggota'];?></td>
+                  <td>
+                  <?php
+                  $a = $fetchdata['No_Anggota'];
+                  $check = $this->global_model->find_by('anggota', array('No_Anggota' => $a));
+                  echo $check['Nama_Anggota'];
+                  ?>
+                  </td>
                   <td><?php echo $fetchdata['nominal'];?></td>
                   <td><?php echo $fetchdata['tanggal_transaksi'];?></td>
                 </tr>

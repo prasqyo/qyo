@@ -32,15 +32,8 @@ class Simpananpokok extends CI_Controller {
 
  	}
 
- 	public function cetak($id){
- 		$check = $this->global_model->find_by('anggota', array('No_Anggota' => $id));
- 		$checkunit = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $check['ID_Unit']));
- 		$data['detailsimpanan'] = $this->global_model->find_all_by('simpanpokok', array('No_Anggota' => $id));
- 		$data['noanggota']  = $check['No_Anggota'];
- 		$data['nik']  = $check['NIK'];
- 		$data['namaanggota']  = $check['Nama_Anggota'];
- 		$data['unit']  = $checkunit['Unit_Kerja'];
-
+ 	public function cetak(){
+ 		$data['detailsimpanan'] = $this->global_model->find_all('simpanpokok');
 		//load view
  		$this->load->view('konten/laporan/cetaksimpananpokok',$data);
 

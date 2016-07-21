@@ -7,7 +7,7 @@
               <div class="title_right">
                 <div class="form-group pull-right">
                   <div class="input-group">
-                    <a class="btn btn-primary"><i class="fa fa-print"></i> Cetak</a>
+                    <a href="<?php echo base_url();?>index.php/simpananpokok/cetak" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</a>
                     <button class="pengaturanbutton btn btn-success"><i class="fa fa-pencil"></i> Edit nominal simpanan</button>
                   </div>
                 </div>
@@ -20,11 +20,10 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_content">
-                    <form method="post" id="myform" action="<?php echo base_url();?>index.php/simpananpokok/hapus">
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th width="20"><input type="checkbox" onclick="for(c in document.getElementsByName('check[]')) document.getElementsByName('check[]').item(c).checked =  this.checked"></th>
+                          <th>Kode Transaksi</th>
                           <th>Nomer Anggota</th>
                           <th>Nama Anggota</th>
                           <th>Nominal</th>
@@ -34,9 +33,9 @@
                       <tbody>
                         <?php foreach ($simpanpokok as $fetchdata) {
                         ?>
-                        <tr class="record">
-                          <td><input type="checkbox" name="check[]" value="<?php echo $fetchdata['No_Anggota'];?>"></td>
-                          <td id="kode"><?php echo $fetchdata['No_Anggota'];?></td>
+                        <tr>
+                          <td><?php echo $fetchdata['kode_transaksi'];?></td>
+                          <td><?php echo $fetchdata['No_Anggota'];?></td>
                           <td>
                           <?php
                             $d = $fetchdata['No_Anggota'];
@@ -58,7 +57,6 @@
                         <?php } ?>
                       </tbody>
                     </table>
-                    </form>
                   </div>
                 </div>
               </div>
