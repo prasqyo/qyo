@@ -87,7 +87,13 @@
                       </div>
                       <div class="form-group">
                         <label>Jangka Waktu (Tahun)</label>
-                        <input type="text" name="jangka_waktu" class="form-control" id="jangkawaktutambah">
+                        <select class="form-control" name="jangka_waktu">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
                       </div>
                       <div class="form-group">
                         <label>Nominal Perbulan</label>
@@ -118,7 +124,13 @@
                       </div>
                       <div class="form-group">
                         <label>Jangka Waktu (Tahun)</label>
-                        <input type="text" name="jangka_waktu" class="form-control" id="jangkawaktuedit">
+                        <select class="form-control" name="jangka_waktu" id="jangkawaktuedit">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
                       </div>
                       <div class="form-group">
                         <label>Nominal Perbulan</label>
@@ -173,7 +185,6 @@ function openmodal(id){
 
     $(".tambahbutton").click(function(event) {
         $("#nominaltambah").val('');
-        $("#jangkawaktutambah").val('');
         $("#nominalperbulantambah").val('');
     });
 </script>

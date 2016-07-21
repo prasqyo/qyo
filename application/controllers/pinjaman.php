@@ -23,11 +23,12 @@ class Pinjaman extends CI_Controller {
  	}
 
  	public function index(){
- 		$data['pinjaman'] = $this->global_model->query('select *from pinjaman group by No_Anggota Desc');
+ 		$data['pinjaman'] = $this->global_model->query('select *from pinjaman group by No_Anggota');
  		$data['anggota'] = $this->global_model->find_all('anggota');
+ 		$data['cicilan'] = $this->global_model->find_all('cicilan');
 		//load view
  		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/simpanansukarela/index',$data);
+ 		$this->load->view('konten/pinjaman/index', $data);
  		$this->load->view('footer/dashboard/index');
 
  	}
@@ -35,7 +36,7 @@ class Pinjaman extends CI_Controller {
  	public function detail($id){
  		$check = $this->global_model->find_by('anggota', array('No_Anggota' => $id));
  		$checkunit = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $check['ID_Unit']));
- 		$data['detailsimpanan'] = $this->global_model->find_all_by('simpansukarela', array('No_Anggota' => $id));
+ 		$data['detailsimpanan'] = $this->global_model->find_all_by('pinjaman', array('No_Anggota' => $id));
  		$data['noanggota']  = $check['No_Anggota'];
  		$data['nik']  = $check['NIK'];
  		$data['namaanggota']  = $check['Nama_Anggota'];
@@ -43,7 +44,7 @@ class Pinjaman extends CI_Controller {
 
 		//load view
  		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/simpanansukarela/detail',$data);
+ 		$this->load->view('konten/pinjaman/detail',$data);
  		$this->load->view('footer/dashboard/index');
 
  	}
@@ -51,21 +52,21 @@ class Pinjaman extends CI_Controller {
  	public function cetak($id){
  		$check = $this->global_model->find_by('anggota', array('No_Anggota' => $id));
  		$checkunit = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $check['ID_Unit']));
- 		$data['detailsimpanan'] = $this->global_model->find_all_by('simpansukarela', array('No_Anggota' => $id));
+ 		$data['detailsimpanan'] = $this->global_model->find_all_by('pinjaman', array('No_Anggota' => $id));
  		$data['noanggota']  = $check['No_Anggota'];
  		$data['nik']  = $check['NIK'];
  		$data['namaanggota']  = $check['Nama_Anggota'];
  		$data['unit']  = $checkunit['Unit_Kerja'];
 
 		//load view
- 		$this->load->view('konten/laporan/cetaksimpanansukarela',$data);
+ 		$this->load->view('konten/laporan/cetakpinjaman',$data);
 
  	}
 	
 	public function tambah(){
 		if($this->input->post('simpan')){
 			/*generate kode transaksi */
- 			$sql = $this->global_model->query("select *from simpansukarela order by kode_transaksi desc");
+ 			$sql = $this->global_model->query("select *from pinjaman order by kode_transaksi desc");
  			$kode = "TR";
 
  			if($sql != Null){
@@ -90,16 +91,16 @@ class Pinjaman extends CI_Controller {
 
  			/* generate waktu input */
  			date_default_timezone_set('Asia/Jakarta');
- 			$getdatetime = date('H:i:s',time());
+ 			$getdatetime = date('d/m/Y H:i:s',time());
  			/* akhir generate waktu input*/
 
 			$data = $this->input->post();
 			$data['kode_transaksi'] = $a;
-			$data['waktu'] = $getdatetime;
+			$data['tanggal_transaksi'] = $getdatetime;
 			unset($data['simpan']);
-			$this->global_model->create('simpansukarela',$data);
-			$this->message('success','Data berhasil di tambah','indexsimpansukarela');
-			redirect(site_url('simpanansukarela'));
+			$this->global_model->create('pinjaman',$data);
+			$this->message('success','Data berhasil di tambah','indexpinjaman');
+			redirect(site_url('pinjaman'));
 		}
 		
 	}
@@ -118,14 +119,14 @@ class Pinjaman extends CI_Controller {
 		$chkbox = $this->input->post('check');
 	 	if(is_array($chkbox)){
 	 		for($i = 0; $i < count($chkbox); $i++){
-	 			$this->global_model->delete('simpansukarela', array('No_Anggota' => $chkbox[$i]));
+	 			$this->global_model->delete('pinjaman', array('No_Anggota' => $chkbox[$i]));
 
 	 		}
 	 	}
 
 	 	//memberikan pesan
- 		$this->message('success','Data berhasil di hapus','indexsimpansukarela');
+ 		$this->message('success','Data berhasil di hapus','indexpinjaman');
 
-	 	redirect(site_url('simpanansukarela'));
+	 	redirect(site_url('pinjaman'));
 	}
 }

@@ -23,7 +23,7 @@ class Simpanansukarela extends CI_Controller {
  	}
 
  	public function index(){
- 		$data['simpansukarela'] = $this->global_model->query('select *from simpansukarela group by No_Anggota Desc');
+ 		$data['simpansukarela'] = $this->global_model->query('select *from simpansukarela group by No_Anggota');
  		$data['anggota'] = $this->global_model->find_all('anggota');
 		//load view
  		$this->load->view('head/dashboard/index');
