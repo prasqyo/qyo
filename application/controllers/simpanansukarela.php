@@ -1,6 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Simpananwajib extends CI_Controller {
+class Simpanansukarela extends CI_Controller {
+
+	function __construct()
+ 	{
+ 		parent::__construct();
+ 		$this->load->model('global_model');
+ 		$this->load->helper('url');
+ 		$this->load->library('session');
+ 	}
 
 	//fungsi ini untuk generate message
  	public function message($mode,$text,$active)
@@ -15,22 +23,53 @@ class Simpananwajib extends CI_Controller {
  	}
 
  	public function index(){
- 		$data['unitkerja'] = $this->global_model->find_all('unit_kerja');
+ 		$data['simpansukarela'] = $this->global_model->query('select *from simpansukarela group by No_Anggota Desc');
+ 		$data['anggota'] = $this->global_model->find_all('anggota');
 		//load view
  		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/unit_kerja/index',$data);
+ 		$this->load->view('konten/simpanansukarela/index',$data);
  		$this->load->view('footer/dashboard/index');
+
+ 	}
+
+ 	public function detail($id){
+ 		$check = $this->global_model->find_by('anggota', array('No_Anggota' => $id));
+ 		$checkunit = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $check['ID_Unit']));
+ 		$data['detailsimpanan'] = $this->global_model->find_all_by('simpansukarela', array('No_Anggota' => $id));
+ 		$data['noanggota']  = $check['No_Anggota'];
+ 		$data['nik']  = $check['NIK'];
+ 		$data['namaanggota']  = $check['Nama_Anggota'];
+ 		$data['unit']  = $checkunit['Unit_Kerja'];
+
+		//load view
+ 		$this->load->view('head/dashboard/index');
+ 		$this->load->view('konten/simpanansukarela/detail',$data);
+ 		$this->load->view('footer/dashboard/index');
+
+ 	}
+
+ 	public function cetak($id){
+ 		$check = $this->global_model->find_by('anggota', array('No_Anggota' => $id));
+ 		$checkunit = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $check['ID_Unit']));
+ 		$data['detailsimpanan'] = $this->global_model->find_all_by('simpansukarela', array('No_Anggota' => $id));
+ 		$data['noanggota']  = $check['No_Anggota'];
+ 		$data['nik']  = $check['NIK'];
+ 		$data['namaanggota']  = $check['Nama_Anggota'];
+ 		$data['unit']  = $checkunit['Unit_Kerja'];
+
+		//load view
+ 		$this->load->view('konten/laporan/cetaksimpanansukarela',$data);
 
  	}
 	
 	public function tambah(){
 		if($this->input->post('simpan')){
-			/*generate kode unit */
- 			$sql = $this->global_model->query("select *from unit_kerja order by ID_Unit desc");
- 			$kode = "UK";
+			/*generate kode transaksi */
+ 			$sql = $this->global_model->query("select *from simpansukarela order by kode_transaksi desc");
+ 			$kode = "TR";
 
  			if($sql != Null){
- 				$pisah = explode('-', $sql[0]['ID_Unit']);
+ 				$pisah = explode('-', $sql[0]['kode_transaksi']);
 
  				$number =  (int) $pisah[1];
  				$digit = intval($number) + 1;
@@ -44,17 +83,23 @@ class Simpananwajib extends CI_Controller {
 	 			}
 
  			}else{
- 				$kodedefault = "UK-001";
+ 				$kodedefault = "TR-001";
  				$a = $kodedefault;
  			}
- 			/* akhir generate kode unit*/
+ 			/* akhir generate kode transaksi*/
+
+ 			/* generate waktu input */
+ 			date_default_timezone_set('Asia/Jakarta');
+ 			$getdatetime = date('H:i:s',time());
+ 			/* akhir generate waktu input*/
 
 			$data = $this->input->post();
-			$data['ID_Unit'] = $a;
+			$data['kode_transaksi'] = $a;
+			$data['waktu'] = $getdatetime;
 			unset($data['simpan']);
-			$this->global_model->create('unit_kerja',$data);
-			$this->message('success','Data berhasil di tambah','indexunitkerja');
-			redirect(site_url('unit_kerja'));
+			$this->global_model->create('simpansukarela',$data);
+			$this->message('success','Data berhasil di tambah','indexsimpansukarela');
+			redirect(site_url('simpanansukarela'));
 		}
 		
 	}
@@ -73,19 +118,14 @@ class Simpananwajib extends CI_Controller {
 		$chkbox = $this->input->post('check');
 	 	if(is_array($chkbox)){
 	 		for($i = 0; $i < count($chkbox); $i++){
-	 			$this->global_model->delete('unit_kerja', array('ID_Unit' => $chkbox[$i]));
+	 			$this->global_model->delete('simpansukarela', array('No_Anggota' => $chkbox[$i]));
 
 	 		}
 	 	}
 
 	 	//memberikan pesan
- 		$this->message('success','Data berhasil di hapus','indexunitkerja');
+ 		$this->message('success','Data berhasil di hapus','indexsimpansukarela');
 
-	 	redirect(site_url('unit_kerja'));
+	 	redirect(site_url('simpanansukarela'));
 	}
-
-	public function tampil($id){
- 		$sql = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $id));
- 		echo json_encode($sql);
- 	}
 }

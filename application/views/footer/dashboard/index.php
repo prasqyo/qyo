@@ -25,6 +25,9 @@
     <script src="<?php echo base_url();?>assetdata/vendors/select2/dist/js/select2.full.min.js"></script>
     <!-- jquery.inputmask -->
     <script src="<?php echo base_url();?>assetdata/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="<?php echo base_url();?>assetdata/js/moment/moment.min.js"></script>
+    <script src="<?php echo base_url();?>assetdata/js/datepicker/daterangepicker.js"></script>
 
     <!-- Select2 -->
     <script>
@@ -67,6 +70,17 @@
       });
     </script>
     <!-- /jquery.inputmask -->
+    <!-- bootstrap-daterangepicker -->
+    <script>
+      $(document).ready(function() {
+        $('#birthday').daterangepicker({
+          singleDatePicker: true,
+          calender_style: "picker_4"
+        }, function(start, end, label) {
+          console.log(start.toISOString(), end.toISOString(), label);
+        });
+      });
+    </script>
     
   </body>
 </html>
