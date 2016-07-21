@@ -27,6 +27,7 @@
                           <th width="20"><input type="checkbox" onclick="for(c in document.getElementsByName('check[]')) document.getElementsByName('check[]').item(c).checked =  this.checked"></th>
                           <th>Nomer Anggota</th>
                           <th>Nama Anggota</th>
+                          <th>Total Simpanan</th>
                           <th>Terakhir melakukan transaksi</th>
                           <th class="text-center">Action</th>
                         </tr>
@@ -43,6 +44,15 @@
                             $checkd = $this->global_model->find_by('anggota', array('No_Anggota' => $d));
                             echo $checkd['Nama_Anggota'];
                           ?>
+                          </td>
+                          <td>
+                          <?php
+                            $d = $fetchdata['No_Anggota'];
+                            $checkd = $this->db->query("select sum(nominal) as jumlah from simpansukarela where No_Anggota='".$d."'");
+                            $row = $checkd->row();
+
+                            echo $row->jumlah;
+                          ?>  
                           </td>
                           <td>
                           <?php
