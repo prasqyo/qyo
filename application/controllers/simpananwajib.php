@@ -61,6 +61,17 @@ class Simpananwajib extends CI_Controller {
  		$this->load->view('konten/laporan/cetaksimpananwajib',$data);
 
  	}
+
+ 	public function setting(){
+ 		if($this->input->post('simpan')){
+ 			$data = $this->input->post();
+ 			unset($data['simpan']);
+ 			$this->global_model->update('settingnominalsimpanan', $data, array('id' => 1));
+
+ 			$this->message('success','Nominal simpanan wajib berhasil di ubah','indexsimpanwajib');
+ 			redirect(site_url('simpananwajib'));
+ 		}
+ 	}
 	
 	public function tambah(){
 		if($this->input->post('simpan')){
@@ -93,9 +104,12 @@ class Simpananwajib extends CI_Controller {
  			$getdatetime = date('d/m/Y H:i:s',time());
  			/* akhir generate tanggal input*/
 
+ 			$getsimpanwajib = $this->global_model->find_by('settingnominalsimpanan', array('id' => 1));
+
 			$data = $this->input->post();
 			$data['kode_transaksi'] = $a;
-			$data['tanggal_transaksi'] = $get;
+			$data['tanggal_transaksi'] = $getdatetime;
+			$data['nominal'] = $getsimpanwajib['simpan_wajib'];
 			unset($data['simpan']);
 			$this->global_model->create('simpanwajib',$data);
 			$this->message('success','Data berhasil di tambah','indexsimpanwajib');
@@ -131,6 +145,11 @@ class Simpananwajib extends CI_Controller {
 
 	public function tampil($id){
  		$sql = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $id));
+ 		echo json_encode($sql);
+ 	}
+
+ 	public function editnominal(){
+ 		$sql = $this->global_model->find_by('settingnominalsimpanan', array('id' => 1));
  		echo json_encode($sql);
  	}
 }

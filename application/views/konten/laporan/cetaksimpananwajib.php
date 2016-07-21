@@ -73,19 +73,26 @@
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
+                  <th>No</th>
                   <th>Kode Transaksi</th>
                   <th>Bulan</th>
                   <th>Tahun</th>
+                  <th>Nominal</th>
                   <th>Tanggal Transaksi</th>
                 </tr>
               </thead>
               <tbody>
-              <?php foreach ($detailsimpanan as $fetchdata) {
+              <?php
+              $no = 0;
+              foreach ($detailsimpanan as $fetchdata) {
+              $no++;
               ?>
                 <tr>
+                  <td><?php echo $no;?></td>
                   <td><?php echo $fetchdata['kode_transaksi'];?></td>
                   <td><?php echo $fetchdata['Bulan'];?></td>
                   <td><?php echo $fetchdata['Tahun'];?></td>
+                  <td><?php echo $fetchdata['nominal'];?></td>
                   <td><?php echo $fetchdata['tanggal_transaksi'];?></td>
                 </tr>
               <?php } ?>

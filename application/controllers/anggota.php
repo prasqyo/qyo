@@ -34,9 +34,11 @@ class Anggota extends CI_Controller {
 	public function tambah(){
 		if($this->input->post('simpan')){
 
-			/*generate kode anggota */
+			/*generate kode anggota,simpanpokok */
  			$sql = $this->global_model->query("select *from anggota order by No_Anggota desc");
+ 			$sql2 = $this->global_model->query("select *from simpanpokok order by kode_transaksi desc");
  			$kode = "ANG";
+ 			$kode2 = "TR";
 
  			if($sql != Null){
  				$pisah = explode('-', $sql[0]['No_Anggota']);
@@ -46,21 +48,27 @@ class Anggota extends CI_Controller {
 
  				if ($digit >= 1 and $digit <= 9){
 					$a = $kode."-00".$digit;
+					$ab = $kode2."-00".$digit;
 	 			}else if($digit >= 10 and $digit <= 99){
 	 				$a = $kode."-0".$digit;
+	 				$ab = $kode2."-0".$digit;
 	 			}else{
 	 				$a = $kode."-".$digit;
+	 				$ab = $kode2."-".$digit;
 	 			}
 
  			}else{
  				$kodedefault = "ANG-001";
+ 				$kodedefault2 = "TR-001";
  				$a = $kodedefault;
+ 				$ab = $kodedefault2;
  			}
  			/* akhir generate kode anggota*/
 
  			/* generate tanggal input anggota */
  			date_default_timezone_set('Asia/Jakarta');
  			$getdatetime = date('m/d/Y H:i:s',time());
+ 			$getdatetime2 = date('d/m/Y H:i:s',time());
 
  			$pisah = explode(' ',$getdatetime);
 
@@ -96,13 +104,8 @@ class Anggota extends CI_Controller {
  					$this->message('error',$texterror.' anggota sudah ada','tambahanggota');
 
  				}else if($texterror == ""){
- 					$nominal = 0;
- 					if($this->input->post('simpansukarela')=="iya"){
- 						if($this->input->post('nominal') != ""){
- 							$nominal = $this->input->post('nominal');
- 						}
- 					}
- 					//kumpulkan data yang ada dalam suatu array
+ 					$getsimpanpokok = $this->global_model->find_by('settingnominalsimpanan', array('id' => 1));
+ 					//kumpulkan data yang ada dalam suatu array untuk anggota
 		 			$kumpuldata = array(
 		 				'No_Anggota' => $a,
 		 				'ID_Unit' => $this->input->post('ID_Unit'),
@@ -114,11 +117,18 @@ class Anggota extends CI_Controller {
 		 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
 		 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'),
 		 				'Status' => 'Anggota',
-		 				'simpansukarela' => $this->input->post('simpansukarela'),
-		 				'nominal' => $nominal);
+		 				'simpansukarela' => $this->input->post('simpansukarela'));
 
 		 			//insert kedalam database melalui model
 		 			$this->global_model->create('anggota', $kumpuldata);
+
+		 			//kumpulkan data yang ada dalam suatu array untuk simpanpokok
+		 			$kumpuldata2 = array(
+		 				'kode_transaksi' => $ab,
+		 				'No_Anggota' => $a,
+		 				'tanggal_transaksi' => $getdatetime2,
+		 				'nominal' => $getsimpanpokok['simpan_pokok']);
+		 			$this->global_model->create('simpanpokok', $kumpuldata2);
 
 		 			//memberikan pesan
 		 			$this->message('success','Data berhasil di tambah','tambahanggota');
@@ -154,12 +164,6 @@ class Anggota extends CI_Controller {
  				if(count($sql) > 0 && $this->input->post('NIK') != $getdata['NIK']){
  					$this->message('error','NIK anggota sudah ada','ubahanggota');
  				}else{
- 					$nominal = 0;
- 					if($this->input->post('simpansukarela')=="iya"){
- 						if($this->input->post('nominal') != ""){
- 							$nominal = $this->input->post('nominal');
- 						}
- 					}
  					//kumpulkan data yang ada dalam suatu array
 		 			$kumpuldata = array(
 	 				'ID_Unit' => $this->input->post('ID_Unit'),
@@ -169,8 +173,7 @@ class Anggota extends CI_Controller {
 	 				'Tanggal_Lahir' => $tanggallahir,
 	 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
 	 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'),
-		 			'simpansukarela' => $this->input->post('simpansukarela'),
-		 			'nominal' => $nominal);
+		 			'simpansukarela' => $this->input->post('simpansukarela'));
 
 	 				//update ke database
 		 			$this->global_model->update('anggota', $kumpuldata, array('No_Anggota' => $id));

@@ -9,6 +9,7 @@
                   <div class="input-group">
                     <button class="tambahbutton btn btn-primary" onclick="openmodal('tambah')"><i class="fa fa-plus"></i> Tambah data</button>
                     <button class="btn btn-danger" onclick="openmodal('hapus')"><i class="fa fa-trash"></i> Hapus data</button>
+                    <button class="pengaturanbutton btn btn-success"><i class="fa fa-pencil"></i> Edit nominal simpanan</button>
                   </div>
                 </div>
               </div>
@@ -25,8 +26,9 @@
                       <thead>
                         <tr>
                           <th width="20"><input type="checkbox" onclick="for(c in document.getElementsByName('check[]')) document.getElementsByName('check[]').item(c).checked =  this.checked"></th>
-                          <th>No_Anggota</th>
+                          <th>Nomer Anggota</th>
                           <th>Nama Anggota</th>
+                          <th>Total Simpanan</th>
                           <th>Terakhir melakukan transaksi</th>
                           <th class="text-center">Action</th>
                         </tr>
@@ -43,6 +45,15 @@
                             $checkd = $this->global_model->find_by('anggota', array('No_Anggota' => $d));
                             echo $checkd['Nama_Anggota'];
                           ?>
+                          </td>
+                          <td>
+                          <?php
+                            $d = $fetchdata['No_Anggota'];
+                            $checkd = $this->db->query("select sum(nominal) as jumlah from simpanwajib where No_Anggota='".$d."'");
+                            $row = $checkd->row();
+
+                            echo $row->jumlah;
+                          ?>  
                           </td>
                           <td>
                           <?php
@@ -135,6 +146,29 @@
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 
+            <div class="modal fade" id="pengaturan">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Edit nominal simpanan</h4>
+                    </div>
+                    <form method="post" action="<?php echo base_url();?>index.php/simpananwajib/setting">
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label>Nominal</label>
+                        <input type="text" name="simpan_wajib" class="form-control" id="nominalsimpananedit" required>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                      <input type="submit" class="btn btn-primary" name="simpan" value="Simpan">
+                    </div>
+                    </form>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
           </div>
 
 <?php
@@ -158,15 +192,12 @@ function openmodal(id){
 }
 </script>
 <script type="text/javascript">
-    $(".editbutton").click(function(event) {
-        var record = $(this).parents('.record');
-
-        $.getJSON('<?php echo base_url(); ?>index.php/simpananwajib/tampil/'+record.find('#kode').html(), function(data) {
-        $("#namaedit").val(data.Unit_Kerja);
-        $("#editform").attr("action", "<?php echo base_url(); ?>/index.php/simpananwajib/edit/"+record.find('#kode').html());
+    $(".pengaturanbutton").click(function(event) {
+        $.getJSON('<?php echo base_url(); ?>index.php/simpananwajib/editnominal', function(data) {
+        $("#nominalsimpananedit").val(data.simpan_wajib);
     });
 
-        $('#edit').modal('show');
+        $('#pengaturan').modal('show');
     
     });
 

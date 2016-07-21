@@ -73,6 +73,7 @@
                                 <th>Kode Transaksi</th>
                                 <th>Bulan</th>
                                 <th>Tahun</th>
+                                <th>Nominal</th>
                                 <th>Tanggal Transaksi</th>
                               </tr>
                             </thead>
@@ -87,6 +88,7 @@
                                 <td><?php echo $fetchdata['kode_transaksi'];?></td>
                                 <td><?php echo $fetchdata['Bulan'];?></td>
                                 <td><?php echo $fetchdata['Tahun'];?></td>
+                                <td><?php echo $fetchdata['nominal'];?></td>
                                 <td><?php echo $fetchdata['tanggal_transaksi'];?></td>
                               </tr>
                               <?php } ?>

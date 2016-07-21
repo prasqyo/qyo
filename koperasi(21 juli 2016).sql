@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 20, 2016 at 10:36 
+-- Generation Time: Jul 21, 2016 at 10:23 
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -37,16 +37,16 @@ CREATE TABLE `anggota` (
   `Jenis_Kelamin` enum('Pria','Wanita') NOT NULL,
   `Alamat_Rumah` varchar(100) NOT NULL,
   `Status` enum('Pengurus','Anggota') NOT NULL,
-  `simpansukarela` enum('iya','tidak') NOT NULL,
-  `nominal` varchar(11) NOT NULL
+  `simpansukarela` enum('iya','tidak') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`No_Anggota`, `ID_Unit`, `NIK`, `Nama_Anggota`, `Tempat`, `Tanggal_Lahir`, `Tanggal_Masuk_Anggota`, `Jenis_Kelamin`, `Alamat_Rumah`, `Status`, `simpansukarela`, `nominal`) VALUES
-('ANG-001', 'UK-002', '201543501316', 'Yolanda Margareth', 'Jakarta', '1995-05-05', '2016-07-20', 'Pria', 'Jalan Kalisari', 'Anggota', 'iya', '0');
+INSERT INTO `anggota` (`No_Anggota`, `ID_Unit`, `NIK`, `Nama_Anggota`, `Tempat`, `Tanggal_Lahir`, `Tanggal_Masuk_Anggota`, `Jenis_Kelamin`, `Alamat_Rumah`, `Status`, `simpansukarela`) VALUES
+('ANG-001', 'UK-001', '201543501315', 'Yolanda Margareth', 'Jakarta', '1997-05-21', '2016-07-21', 'Wanita', 'Kali Sari', 'Anggota', 'iya'),
+('ANG-002', 'UK-001', '201543501316', 'Gunawan puspo prajoko', 'Jakarta', '1997-05-21', '2016-07-21', 'Pria', 'Jalan condet batu ampar', 'Anggota', 'iya');
 
 -- --------------------------------------------------------
 
@@ -191,14 +191,42 @@ CREATE TABLE `pinjaman_header` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `settingnominalsimpanan`
+--
+
+CREATE TABLE `settingnominalsimpanan` (
+  `id` int(11) NOT NULL,
+  `simpan_pokok` int(11) NOT NULL,
+  `simpan_wajib` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `settingnominalsimpanan`
+--
+
+INSERT INTO `settingnominalsimpanan` (`id`, `simpan_pokok`, `simpan_wajib`) VALUES
+(1, 10000, 10000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `simpanpokok`
 --
 
 CREATE TABLE `simpanpokok` (
   `kode_transaksi` varchar(10) NOT NULL,
   `No_Anggota` varchar(10) NOT NULL,
-  `tanggal_transaksi` date NOT NULL
+  `tanggal_transaksi` varchar(20) NOT NULL,
+  `nominal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `simpanpokok`
+--
+
+INSERT INTO `simpanpokok` (`kode_transaksi`, `No_Anggota`, `tanggal_transaksi`, `nominal`) VALUES
+('TR-001', 'ANG-001', '21/07/2016 14:30:43', 15000),
+('TR-002', 'ANG-002', '21/07/2016 14:32:18', 10000);
 
 -- --------------------------------------------------------
 
@@ -210,7 +238,8 @@ CREATE TABLE `simpansukarela` (
   `kode_transaksi` varchar(10) NOT NULL,
   `No_Anggota` varchar(10) NOT NULL,
   `nominal` int(11) NOT NULL,
-  `tanggal_transaksi` date NOT NULL
+  `tanggal_transaksi` varchar(15) NOT NULL,
+  `waktu` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -224,16 +253,9 @@ CREATE TABLE `simpanwajib` (
   `No_Anggota` varchar(10) NOT NULL,
   `Bulan` varchar(20) NOT NULL,
   `Tahun` int(11) NOT NULL,
-  `tanggal_transaksi` varchar(25) NOT NULL
+  `tanggal_transaksi` varchar(25) NOT NULL,
+  `nominal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `simpanwajib`
---
-
-INSERT INTO `simpanwajib` (`kode_transaksi`, `No_Anggota`, `Bulan`, `Tahun`, `tanggal_transaksi`) VALUES
-('TR-001', 'ANG-001', 'Januari', 2016, '20/07/2016 12:36:19'),
-('TR-002', 'ANG-001', 'Februari', 2016, '20/07/2016 12:36:58');
 
 -- --------------------------------------------------------
 
@@ -334,6 +356,12 @@ ALTER TABLE `pinjaman_header`
   ADD PRIMARY KEY (`Kode_Pinjaman_Header`);
 
 --
+-- Indexes for table `settingnominalsimpanan`
+--
+ALTER TABLE `settingnominalsimpanan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `simpanpokok`
 --
 ALTER TABLE `simpanpokok`
@@ -367,6 +395,11 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `settingnominalsimpanan`
+--
+ALTER TABLE `settingnominalsimpanan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `user`
 --

@@ -67,16 +67,10 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Simpanan Sukarela</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" name="simpansukarela" tabindex="-1" required id="simpansukarela" onchange="checknominal(this.value)">
+                          <select class="form-control" name="simpansukarela" tabindex="-1" required>
                             <option value="iya">Iya</option>
                             <option value="tidak">Tidak</option>
                           </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nominal</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="nominal" class="form-control col-md-7 col-xs-12" id="nominal" onkeypress="return isNumberKey(event)">
                         </div>
                       </div>
                       <div class="form-group">
@@ -115,14 +109,6 @@ echo "</script>";
 }
 ?>
 <script type="text/javascript">
-  function checknominal(str){
-    if(str == "iya"){
-      document.getElementById("nominal").disabled = false;
-    }else{
-      document.getElementById("nominal").disabled = true;
-      document.getElementById("nominal").value = 0;
-    }
-  }
   function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))

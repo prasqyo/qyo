@@ -25,7 +25,7 @@
                       <thead>
                         <tr>
                           <th width="20"><input type="checkbox" onclick="for(c in document.getElementsByName('check[]')) document.getElementsByName('check[]').item(c).checked =  this.checked"></th>
-                          <th>No_Anggota</th>
+                          <th>Nomer Anggota</th>
                           <th>Nama Anggota</th>
                           <th>Terakhir melakukan transaksi</th>
                           <th class="text-center">Action</th>

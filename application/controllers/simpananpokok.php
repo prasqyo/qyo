@@ -1,6 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Simpananwajib extends CI_Controller {
+class Simpananpokok extends CI_Controller {
+
+	function __construct()
+ 	{
+ 		parent::__construct();
+ 		$this->load->model('global_model');
+ 		$this->load->helper('url');
+ 		$this->load->library('session');
+ 	}
 
 	//fungsi ini untuk generate message
  	public function message($mode,$text,$active)
@@ -15,77 +23,57 @@ class Simpananwajib extends CI_Controller {
  	}
 
  	public function index(){
- 		$data['unitkerja'] = $this->global_model->find_all('unit_kerja');
+ 		$data['simpanpokok'] = $this->global_model->query('select *from simpanpokok');
+ 		$data['anggota'] = $this->global_model->find_all('anggota');
 		//load view
  		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/unit_kerja/index',$data);
+ 		$this->load->view('konten/simpananpokok/index',$data);
  		$this->load->view('footer/dashboard/index');
 
  	}
+
+ 	public function cetak($id){
+ 		$check = $this->global_model->find_by('anggota', array('No_Anggota' => $id));
+ 		$checkunit = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $check['ID_Unit']));
+ 		$data['detailsimpanan'] = $this->global_model->find_all_by('simpanpokok', array('No_Anggota' => $id));
+ 		$data['noanggota']  = $check['No_Anggota'];
+ 		$data['nik']  = $check['NIK'];
+ 		$data['namaanggota']  = $check['Nama_Anggota'];
+ 		$data['unit']  = $checkunit['Unit_Kerja'];
+
+		//load view
+ 		$this->load->view('konten/laporan/cetaksimpananpokok',$data);
+
+ 	}
+
+ 	public function setting(){
+ 		if($this->input->post('simpan')){
+ 			$data = $this->input->post();
+ 			unset($data['simpan']);
+ 			$this->global_model->update('settingnominalsimpanan', $data, array('id' => 1));
+
+ 			$this->message('success','Nominal simpanan pokok berhasil di ubah','indexsimpanpokok');
+ 			redirect(site_url('simpananpokok'));
+ 		}
+ 	}
 	
-	public function tambah(){
-		if($this->input->post('simpan')){
-			/*generate kode unit */
- 			$sql = $this->global_model->query("select *from unit_kerja order by ID_Unit desc");
- 			$kode = "UK";
-
- 			if($sql != Null){
- 				$pisah = explode('-', $sql[0]['ID_Unit']);
-
- 				$number =  (int) $pisah[1];
- 				$digit = intval($number) + 1;
-
- 				if ($digit >= 1 and $digit <= 9){
-					$a = $kode."-00".$digit;
-	 			}else if($digit >= 10 and $digit <= 99){
-	 				$a = $kode."-0".$digit;
-	 			}else{
-	 				$a = $kode."-".$digit;
-	 			}
-
- 			}else{
- 				$kodedefault = "UK-001";
- 				$a = $kodedefault;
- 			}
- 			/* akhir generate kode unit*/
-
-			$data = $this->input->post();
-			$data['ID_Unit'] = $a;
-			unset($data['simpan']);
-			$this->global_model->create('unit_kerja',$data);
-			$this->message('success','Data berhasil di tambah','indexunitkerja');
-			redirect(site_url('unit_kerja'));
-		}
-		
-	}
-
-	public function edit($id){
-		if($this->input->post('simpan')){
-			$data = $this->input->post();
-			unset($data['simpan']);
-			$this->global_model->update('unit_kerja',$data, array('ID_Unit' => $id));
-			$this->message('success','Data berhasil di edit','indexunitkerja');
-			redirect(site_url('unit_kerja'));
-		}
-	}
-
 	public function hapus(){
 		$chkbox = $this->input->post('check');
 	 	if(is_array($chkbox)){
 	 		for($i = 0; $i < count($chkbox); $i++){
-	 			$this->global_model->delete('unit_kerja', array('ID_Unit' => $chkbox[$i]));
+	 			$this->global_model->delete('simpanpokok', array('No_Anggota' => $chkbox[$i]));
 
 	 		}
 	 	}
 
 	 	//memberikan pesan
- 		$this->message('success','Data berhasil di hapus','indexunitkerja');
+ 		$this->message('success','Data berhasil di hapus','indexsimpanpokok');
 
-	 	redirect(site_url('unit_kerja'));
+	 	redirect(site_url('simpananpokok'));
 	}
 
-	public function tampil($id){
- 		$sql = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $id));
+ 	public function editnominal(){
+ 		$sql = $this->global_model->find_by('settingnominalsimpanan', array('id' => 1));
  		echo json_encode($sql);
  	}
 }
