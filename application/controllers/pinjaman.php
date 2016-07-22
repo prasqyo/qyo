@@ -94,9 +94,14 @@ class Pinjaman extends CI_Controller {
  			$getdatetime = date('d/m/Y H:i:s',time());
  			/* akhir generate waktu input*/
 
+ 			$checkdurasi = $this->global_model->find_by('cicilan',array('kode_cicilan' => $this->input->post('jangka_waktu')));
+ 			$banyak = intval($checkdurasi['jangka_waktu']*12);
+
 			$data = $this->input->post();
 			$data['kode_transaksi'] = $a;
 			$data['tanggal_transaksi'] = $getdatetime;
+			$data['banyak_cicilan'] = $banyak;
+			$data['status'] = "aktif";
 			unset($data['simpan']);
 			$this->global_model->create('pinjaman',$data);
 			$this->message('success','Data berhasil di tambah','indexpinjaman');

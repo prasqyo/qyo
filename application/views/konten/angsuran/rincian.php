@@ -1,13 +1,13 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3><a href="<?php echo base_url();?>index.php/pinjaman">Pinjaman</a> <small>Detail pinjaman</small></h3>
+                <h3><a href="<?php echo base_url();?>index.php/angsuran/detail/<?php echo $noanggota;?>">Angsuran Pinjaman</a> <small>Detail angsuran pinjam</small></h3>
               </div>
 
               <div class="title_right">
                 <div class="form-group pull-right">
                   <div class="input-group">
-                    <a href="<?php echo base_url();?>index.php/pinjaman/cetak/<?php echo $this->uri->segment(3);?>" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> Cetak</a>
+                    <a href="<?php echo base_url();?>index.php/angsuran/cetak/<?php echo $this->uri->segment(3);?>" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> Cetak</a>
                   </div>
                 </div>
               </div>
@@ -37,11 +37,6 @@
                               <td width="100"><?php echo $noanggota; ?></td>
                             </tr>
                             <tr>
-                              <td width="50">NIK</td>
-                              <td width="20" class="text-center">:</td>
-                              <td width="100"><?php echo $nik; ?></td>
-                            </tr>
-                            <tr>
                               <td width="50">Nama Anggota</td>
                               <td width="20" class="text-center">:</td>
                               <td width="100"><?php echo $namaanggota; ?></td>
@@ -54,7 +49,12 @@
                             <tr>
                               <td width="50">Jenis Transaksi</td>
                               <td width="20" class="text-center">:</td>
-                              <td width="100">Pinjaman</td>
+                              <td width="100">Angsuran pinjam</td>
+                            </tr>
+                            <tr>
+                              <td width="50">Kode Angsuran</td>
+                              <td width="20" class="text-center">:</td>
+                              <td width="100"><?php echo $kodeangsuran; ?></td>
                             </tr>
                           </table>
                         </div>
@@ -74,9 +74,7 @@
                                 <th>Nominal pinjaman</th>
                                 <th>Jangka Waktu</th>
                                 <th>Cicilan Perbulan</th>
-                                <th>Telah Angsur/Banyak Angsuran</th>
-                                <th>Status</th>
-                                <th>Tanggal Transaksi</th>
+                                <th>Tanggal Angsuran</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -102,16 +100,8 @@
                                   echo $check['jangka_waktu']." Tahun";
                                 ?>
                                 </td>
-                                <td>
-                                <?php
-                                  $a = $fetchdata['kode_cicilan'];
-                                  $check = $this->global_model->find_by('cicilan', array('kode_cicilan' => $a));
-                                  echo $check['nominal_cicilan'];
-                                ?>
-                                </td>
-                                <td>0/<?php echo $fetchdata['banyak_cicilan'] ?></td>
-                                <td><?php echo $fetchdata['status'] ?></td>
-                                <td><?php echo $fetchdata['tanggal_transaksi'];?></td>
+                                <td><?php echo $fetchdata['nominal'];?></td>
+                                <td><?php echo $fetchdata['tanggal_angsuran'];?></td>
                               </tr>
                               <?php } ?>
                             </tbody>
