@@ -141,7 +141,7 @@
           </div>
 
 <?php
-if($this->session->flashdata('messagemode','messagetext','messageactive') && $this->session->flashdata('messageactive') == "indexsimpansukarela"){
+if($this->session->flashdata('messagemode','messagetext','messageactive') && $this->session->flashdata('messageactive') == "indexpinjaman"){
 echo "<script type='text/javascript'>";
   echo "$(document).ready(function() {";
     echo "new PNotify({";

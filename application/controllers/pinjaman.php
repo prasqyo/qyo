@@ -110,22 +110,12 @@ class Pinjaman extends CI_Controller {
 		
 	}
 
-	public function edit($id){
-		if($this->input->post('simpan')){
-			$data = $this->input->post();
-			unset($data['simpan']);
-			$this->global_model->update('unit_kerja',$data, array('ID_Unit' => $id));
-			$this->message('success','Data berhasil di edit','indexunitkerja');
-			redirect(site_url('unit_kerja'));
-		}
-	}
-
 	public function hapus(){
 		$chkbox = $this->input->post('check');
 	 	if(is_array($chkbox)){
 	 		for($i = 0; $i < count($chkbox); $i++){
 	 			$this->global_model->delete('pinjaman', array('No_Anggota' => $chkbox[$i]));
-
+	 			$this->global_model->delete('angsuran_pinjam', array('No_Anggota' => $chkbox[$i]));
 	 		}
 	 	}
 

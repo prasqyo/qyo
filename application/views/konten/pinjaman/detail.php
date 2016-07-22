@@ -109,7 +109,11 @@
                                   echo $check['nominal_cicilan'];
                                 ?>
                                 </td>
-                                <td>0/<?php echo $fetchdata['banyak_cicilan'] ?></td>
+                                <td>
+                                <?php 
+                                $getjumlah = count($this->global_model->query("select *from angsuran_pinjam where kode_transaksi='".$fetchdata['kode_transaksi']."' and No_Anggota='".$noanggota."'"));
+                                echo $getjumlah."/".$fetchdata['banyak_cicilan'] ?>
+                                </td>
                                 <td><?php echo $fetchdata['status'] ?></td>
                                 <td><?php echo $fetchdata['tanggal_transaksi'];?></td>
                               </tr>

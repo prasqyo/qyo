@@ -118,6 +118,22 @@
 
           </div>
 
+
+<?php
+if($this->session->flashdata('messagemode','messagetext','messageactive') && $this->session->flashdata('messageactive') == "indexangsurandetail"){
+echo "<script type='text/javascript'>";
+  echo "$(document).ready(function() {";
+    echo "new PNotify({";
+      echo "title: 'Informasi !',";
+      echo "text: '".$this->session->flashdata('messagetext')."',";
+      echo "type: '".$this->session->flashdata('messagemode')."',";
+      echo "styling: 'bootstrap3'";
+    echo "});";
+  echo "});";
+echo "</script>";
+}
+?>
+
 <script type="text/javascript">
     $(".angsuranbutton").click(function(event) {
         var record = $(this).parents('.record');

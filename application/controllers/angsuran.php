@@ -137,6 +137,8 @@ class Angsuran extends CI_Controller {
 
 		$this->global_model->create('angsuran_pinjam', $kumpuldata);
 
+		$this->message('success','Angsuran berhasil di tambahkan','indexangsurandetail');
+
 		redirect(site_url('angsuran/detail/'.$check['No_Anggota']));
 	}
 
