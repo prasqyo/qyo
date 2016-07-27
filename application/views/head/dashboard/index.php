@@ -57,6 +57,7 @@
                       <li><a href="<?php echo base_url();?>index.php/unit_kerja">Unit Kerja</a></li>
                       <li><a href="<?php echo base_url();?>index.php/jabatan">Jabatan</a></li>
                       <li><a href="<?php echo base_url();?>index.php/cicilan">Cicilan</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/pengurus">Pengurus</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-file"></i> Simpanan <span class="fa fa-chevron-down"></span></a>
@@ -74,9 +75,8 @@
                       <li><a href="#">Laporan Piutang Anggota</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-gears"></i> Pengaturan <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-gears"></i> Pengaturan User <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url();?>index.php/pengurus">Pengurus</a></li>
                       <li><a href="<?php echo base_url();?>index.php/user">User</a></li>
                     </ul>
                   </li>
