@@ -92,10 +92,21 @@ class Simpanansukarela extends CI_Controller {
  			date_default_timezone_set('Asia/Jakarta');
  			$getdatetime = date('H:i:s',time());
  			/* akhir generate waktu input*/
+ 			list($bulan,$tanggal,$tahun) = explode('/', $this->input->post('tanggal_transaksi'));
+ 			$tanggaltransaksi = $tanggal.'/'.$bulan.'/'.$tahun;
+
+ 			$namabulan = array(
+ 				'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus',
+ 				'September','Oktober','November','Desember');
+
+ 			$c = intval($bulan);
 
 			$data = $this->input->post();
 			$data['kode_transaksi'] = $a;
+			$data['tanggal_transaksi'] = $tanggaltransaksi;
 			$data['waktu'] = $getdatetime;
+			$data['Bulan'] = $namabulan[$c-1];
+			$data['Tahun'] = $tahun;
 			unset($data['simpan']);
 			$this->global_model->create('simpansukarela',$data);
 			$this->message('success','Data berhasil di tambah','indexsimpansukarela');

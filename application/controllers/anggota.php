@@ -71,15 +71,22 @@ class Anggota extends CI_Controller {
  			$getdatetime2 = date('d/m/Y H:i:s',time());
 
  			$pisah = explode(' ',$getdatetime);
-
  			list($bulan,$tanggal,$tahun) = explode('/', $pisah[0]);
-
  			$tanggalinput = $tahun."-".$bulan."-".$tanggal;
+
+ 			$pisah2 = explode(' ',$getdatetime2);
+ 			list($tanggal2,$bulan2,$tahun2) = explode('/', $pisah2[0]);
  			/* akhir generate tanggal input anggota */
 
  			//ganti format inputan ke format tanggal database
- 			list($tanggal,$bulan,$tahun) = explode('/', $this->input->post('Tanggal_Lahir'));
- 			$tanggallahir = $tahun."-".$bulan."-".$tanggal;
+ 			list($tanggal1,$bulan1,$tahun1) = explode('/', $this->input->post('Tanggal_Lahir'));
+ 			$tanggallahir = $tahun1."-".$bulan1."-".$tanggal1;
+
+ 			$namabulan = array(
+ 				'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus',
+ 				'September','Oktober','November','Desember');
+
+ 			$c = intval($bulan2);
 
  			//variable untuk cek
  			$listfield = array('NIK');
@@ -127,7 +134,9 @@ class Anggota extends CI_Controller {
 		 				'kode_transaksi' => $ab,
 		 				'No_Anggota' => $a,
 		 				'tanggal_transaksi' => $getdatetime2,
-		 				'nominal' => $getsimpanpokok['simpan_pokok']);
+		 				'nominal' => $getsimpanpokok['simpan_pokok'],
+		 				'Bulan' => $namabulan[$c-1],
+		 				'Tahun' => $tahun2);
 		 			$this->global_model->create('simpanpokok', $kumpuldata2);
 
 		 			//memberikan pesan
