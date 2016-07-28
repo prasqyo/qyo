@@ -72,7 +72,7 @@
                   <li><a><i class="fa fa-briefcase"></i> Laporan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>index.php/lapsimpanan">Laporan Simpanan Anggota</a></li>
-                      <li><a href="#">Laporan Piutang Anggota</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/lappiutang">Laporan Piutang Anggota</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-gears"></i> Pengaturan User <span class="fa fa-chevron-down"></span></a>
