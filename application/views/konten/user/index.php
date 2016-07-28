@@ -109,7 +109,7 @@
                         <select class="form-control" name="Level" required>
                           <option></option>
                           <option value="2">Ketua</option>
-                          <option value="3">Pengurus</option>            
+                          <option value="3">Pengurus</option>
                         </select>
                       </div>
                     </div>
@@ -148,7 +148,8 @@
                         <select class="form-control" name="Level" id="leveledit" required>
                           <option></option>
                           <option value="2">Ketua</option>
-                          <option value="3">Pengurus</option>            
+                          <option value="3">Pengurus</option>
+                          <option value="4">Karyawan</option>            
                         </select>
                       </div>
                     </div>

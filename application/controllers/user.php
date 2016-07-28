@@ -78,6 +78,11 @@ class User extends CI_Controller {
 				unset($data['Password']);
 			}
 			$this->global_model->update('user',$data, array('kode_user' => $id));
+
+			$kumpuldata = array(
+				'Nama_Anggota' => $this->input->post('Nama_Lengkap'));
+			$this->global_model->update('anggota',$kumpuldata, array('kode_user' => $id));
+
 			$this->message('success','Data berhasil di edit','indexuser');
 			redirect(site_url('user'));
 		}

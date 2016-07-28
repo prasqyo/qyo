@@ -34,36 +34,79 @@ class Anggota extends CI_Controller {
 	public function tambah(){
 		if($this->input->post('simpan')){
 
-			/*generate kode anggota,simpanpokok */
+			/*generate kode anggota,simpanpokok,user*/
  			$sql = $this->global_model->query("select *from anggota order by No_Anggota desc");
  			$sql2 = $this->global_model->query("select *from simpanpokok order by kode_transaksi desc");
+ 			$sql3 = $this->global_model->query("select *from user order by kode_user desc");
  			$kode = "ANG";
  			$kode2 = "TR";
+ 			$kode3 = "USR";
 
  			if($sql != Null){
  				$pisah = explode('-', $sql[0]['No_Anggota']);
-
  				$number =  (int) $pisah[1];
  				$digit = intval($number) + 1;
 
  				if ($digit >= 1 and $digit <= 9){
 					$a = $kode."-00".$digit;
-					$ab = $kode2."-00".$digit;
 	 			}else if($digit >= 10 and $digit <= 99){
 	 				$a = $kode."-0".$digit;
-	 				$ab = $kode2."-0".$digit;
 	 			}else{
 	 				$a = $kode."-".$digit;
-	 				$ab = $kode2."-".$digit;
 	 			}
 
  			}else{
  				$kodedefault = "ANG-001";
- 				$kodedefault2 = "TR-001";
  				$a = $kodedefault;
+ 			}
+
+ 			if($sql2 != Null){
+ 				$pisah2 = explode('-', $sql2[0]['kode_transaksi']);
+ 				$number2 =  (int) $pisah2[1];
+ 				$digit2 = intval($number2) + 1;
+
+ 				if ($digit2 >= 1 and $digit2 <= 9){
+					$ab = $kode2."-00".$digit2;
+	 			}else if($digit2 >= 10 and $digit2 <= 99){
+	 				$ab = $kode2."-0".$digit2;
+	 			}else{
+	 				$ab = $kode2."-".$digit2;
+	 			}
+
+ 			}else{
+ 				$kodedefault2 = "TR-001";
  				$ab = $kodedefault2;
  			}
+
+ 			if($sql3 != Null){
+ 				$pisah3 = explode('-', $sql3[0]['kode_user']);
+
+ 				$number3 =  (int) $pisah3[1];
+ 				$digit3 = intval($number3) + 1;
+
+ 				if ($digit3 >= 1 and $digit3 <= 9){
+					$ac = $kode3."-00".$digit3;
+	 			}else if($digit3 >= 10 and $digit3 <= 99){
+	 				$ac = $kode3."-0".$digit3;
+	 			}else{	 				
+	 				$ac = $kode3."-".$digit3;
+	 			}
+
+ 			}else{
+ 				$kodedefault3 = "ANR-001";
+ 				$ac = $kodedefault3;
+ 			}
  			/* akhir generate kode anggota*/
+
+ 			/*generate username dan password*/
+ 			$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ 			$length = 10;
+    		$charactersLength = strlen($characters);
+    		$randomString = '';
+    		for ($i = 0; $i < $length; $i++) {
+        		$randomString .= $characters[rand(0, $charactersLength - 1)];
+    		}
+ 			
 
  			/* generate tanggal input anggota */
  			date_default_timezone_set('Asia/Jakarta');
@@ -124,7 +167,8 @@ class Anggota extends CI_Controller {
 		 				'Jenis_Kelamin' => $this->input->post('Jenis_Kelamin'),
 		 				'Alamat_Rumah' => $this->input->post('Alamat_Rumah'),
 		 				'Status' => 'Anggota',
-		 				'simpansukarela' => $this->input->post('simpansukarela'));
+		 				'simpansukarela' => $this->input->post('simpansukarela'),
+		 				'kode_user' => $ac);
 
 		 			//insert kedalam database melalui model
 		 			$this->global_model->create('anggota', $kumpuldata);
@@ -138,6 +182,15 @@ class Anggota extends CI_Controller {
 		 				'Bulan' => $namabulan[$c-1],
 		 				'Tahun' => $tahun2);
 		 			$this->global_model->create('simpanpokok', $kumpuldata2);
+
+		 			$kumpuldata3 = array(
+		 				'kode_user' => $ac,
+		 				'Nama_Lengkap' => $this->input->post('Nama_Anggota'),
+		 				'Username' => $randomString,
+		 				'Password' => md5($randomString),
+		 				'Level' => '4');
+
+		 			$this->global_model->create('user', $kumpuldata3);
 
 		 			//memberikan pesan
 		 			$this->message('success','Data berhasil di tambah','tambahanggota');
@@ -186,6 +239,12 @@ class Anggota extends CI_Controller {
 
 	 				//update ke database
 		 			$this->global_model->update('anggota', $kumpuldata, array('No_Anggota' => $id));
+
+		 			$kumpuldata2 = array(
+		 				'Nama_Lengkap' => $this->input->post('Nama_Anggota'));
+
+		 			//update ke database
+		 			$this->global_model->update('user', $kumpuldata2, array('kode_user' => $getdata['kode_user']));
 
 		 			//memberikan pesan
 		 			$this->message('success','Data berhasil di edit','ubahanggota');
