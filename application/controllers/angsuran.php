@@ -8,6 +8,11 @@ class Angsuran extends CI_Controller {
  		$this->load->model('global_model');
  		$this->load->helper('url');
  		$this->load->library('session');
+
+ 		if(!$this->session->userdata('Nama_Lengkap','Username','Level','kode_user'))
+	    {
+	      redirect(site_url('/'));
+	    }
  	}
 
 	//fungsi ini untuk generate message

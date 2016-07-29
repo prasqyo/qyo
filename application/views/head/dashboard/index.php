@@ -50,16 +50,23 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
+                <?php if($this->session->userdata('Level')=="1" || $this->session->userdata('Level')=="2" || $this->session->userdata('Level')=="3"){ ?>
                   <li><a href="<?php echo base_url();?>index.php/dashboard"><i class="fa fa-home"></i> Dashboard</a></li>
+                <?php }?>
+                <?php if($this->session->userdata('Level')=="1" || $this->session->userdata('Level')=="3"){ ?>
                   <li><a><i class="fa fa-edit"></i> Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>index.php/anggota">Anggota</a></li>
+                      <?php if($this->session->userdata('Level')=="1"){ ?>
                       <li><a href="<?php echo base_url();?>index.php/unit_kerja">Unit Kerja</a></li>
                       <li><a href="<?php echo base_url();?>index.php/jabatan">Jabatan</a></li>
                       <li><a href="<?php echo base_url();?>index.php/cicilan">Cicilan</a></li>
                       <li><a href="<?php echo base_url();?>index.php/pengurus">Pengurus</a></li>
+                      <?php }?>
                     </ul>
                   </li>
+                <?php }?>
+                <?php if($this->session->userdata('Level')=="1" || $this->session->userdata('Level')=="3"){ ?>
                   <li><a><i class="fa fa-file"></i> Simpanan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>index.php/simpananwajib">Simpanan Wajib</a></li>
@@ -69,17 +76,22 @@
                   </li>
                   <li><a href="<?php echo base_url();?>index.php/pinjaman"><i class="fa fa-clipboard"></i> Pinjaman</a></li>
                   <li><a href="<?php echo base_url();?>index.php/angsuran"><i class="fa fa-money"></i> Angsuran pinjaman</a></li>
+                <?php }?>
+                <?php if($this->session->userdata('Level')=="1" || $this->session->userdata('Level')=="2"){ ?>
                   <li><a><i class="fa fa-briefcase"></i> Laporan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>index.php/lapsimpanan">Laporan Simpanan Anggota</a></li>
                       <li><a href="<?php echo base_url();?>index.php/lappiutang">Laporan Piutang Anggota</a></li>
                     </ul>
                   </li>
+                <?php } ?>
+                <?php if($this->session->userdata('Level')=="1"){ ?>
                   <li><a><i class="fa fa-gears"></i> Pengaturan User <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>index.php/user">User</a></li>
                     </ul>
                   </li>
+                <?php } ?>
                 </ul>
               </div>
             </div>
@@ -104,7 +116,7 @@
                 </li>
                 <li class="">
                   <a href="#" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo base_url();?>assetdata/images/user.png" alt="">Administrator
+                    <img src="<?php echo base_url();?>assetdata/images/user.png" alt=""><?php echo $this->session->userdata('Nama_Lengkap'); ?>
                   </a>
                 </li>
               </ul>
