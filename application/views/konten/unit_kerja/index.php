@@ -79,7 +79,7 @@
                     <div class="modal-body">
                       <div class="form-group">
                         <label>Nama Unit</label>
-                        <input type="text" name="Unit_Kerja" class="form-control" id="namatambah">
+                        <input type="text" name="Unit_Kerja" class="form-control" id="namatambah" required>
                       </div>
                     </div>
                     <div class="modal-footer">

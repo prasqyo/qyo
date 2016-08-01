@@ -65,8 +65,18 @@ class Unit_kerja extends CI_Controller {
 			$data = $this->input->post();
 			$data['ID_Unit'] = $a;
 			unset($data['simpan']);
-			$this->global_model->create('unit_kerja',$data);
-			$this->message('success','Data berhasil di tambah','indexunitkerja');
+
+			$check = count($this->global_model->find_by('unit_kerja', array('Unit_Kerja' => $this->input->post('Unit_Kerja'))));
+
+			if($this->input->post('Unit_Kerja')==""){
+				$this->message('error','Nama unit tidak boleh kosong','indexunitkerja');
+			}else if($check > 0){
+				$this->message('error','Nama unit sudah tersedia','indexunitkerja');
+			}else{
+				$this->global_model->create('unit_kerja',$data);
+				$this->message('success','Data berhasil di tambah','indexunitkerja');
+			}
+			
 			redirect(site_url('unit_kerja'));
 		}
 		
@@ -76,8 +86,18 @@ class Unit_kerja extends CI_Controller {
 		if($this->input->post('simpan')){
 			$data = $this->input->post();
 			unset($data['simpan']);
-			$this->global_model->update('unit_kerja',$data, array('ID_Unit' => $id));
-			$this->message('success','Data berhasil di edit','indexunitkerja');
+			
+			$check = count($this->global_model->find_by('unit_kerja', array('Unit_Kerja' => $this->input->post('Unit_Kerja'))));
+
+			if($this->input->post('Unit_Kerja')==""){
+				$this->message('error','Nama unit tidak boleh kosong','indexunitkerja');
+			}else if($check > 0){
+				$this->message('error','Nama unit sudah tersedia','indexunitkerja');
+			}else{
+				$this->global_model->update('unit_kerja',$data, array('ID_Unit' => $id));
+				$this->message('success','Data berhasil di edit','indexunitkerja');
+			}
+
 			redirect(site_url('unit_kerja'));
 		}
 	}
