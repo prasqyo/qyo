@@ -55,7 +55,7 @@ class Angsuran extends CI_Controller {
  	}
 
  	public function rincian($id){
- 		$check = $this->global_model->find_by('angsuran_pinjam', array('kode_transaksi' => $id));
+ 		$check = $this->global_model->find_by('pinjaman', array('kode_transaksi' => $id));
  		$check1 = $this->global_model->find_by('anggota', array('No_Anggota' => $check['No_Anggota']));
  		$checkunit = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $check1['ID_Unit']));
  		$data['detailsimpanan'] = $this->global_model->find_all_by('angsuran_pinjam', array('kode_transaksi' => $id));
@@ -63,7 +63,6 @@ class Angsuran extends CI_Controller {
  		$data['nik']  = $check1['NIK'];
  		$data['namaanggota']  = $check1['Nama_Anggota'];
  		$data['unit']  = $checkunit['Unit_Kerja'];
- 		$data['kodeangsuran']  = $check['kode_angsuran'];
 
 		//load view
  		$this->load->view('head/dashboard/index');

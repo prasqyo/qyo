@@ -51,11 +51,6 @@
                               <td width="20" class="text-center">:</td>
                               <td width="100">Angsuran pinjam</td>
                             </tr>
-                            <tr>
-                              <td width="50">Kode Angsuran</td>
-                              <td width="20" class="text-center">:</td>
-                              <td width="100"><?php echo $kodeangsuran; ?></td>
-                            </tr>
                           </table>
                         </div>
                         <!-- /.col -->
