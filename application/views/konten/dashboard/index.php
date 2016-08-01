@@ -1,3 +1,4 @@
+<?php if($this->session->userdata('Level')=="1" || $this->session->userdata('Level')=="2" || $this->session->userdata('Level')=="3"){ ?>
 <!-- top tiles -->
 <div class="row tile_count">
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -64,6 +65,7 @@
   </div>
 </div>
 <!-- /top tiles -->
+<?php } ?>
 
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">

@@ -28,12 +28,28 @@ class Simpanansukarela extends CI_Controller {
  	}
 
  	public function index(){
- 		$data['simpansukarela'] = $this->global_model->query('select *from simpansukarela group by No_Anggota');
- 		$data['anggota'] = $this->global_model->find_all('anggota');
-		//load view
- 		$this->load->view('head/dashboard/index');
- 		$this->load->view('konten/simpanansukarela/index',$data);
- 		$this->load->view('footer/dashboard/index');
+ 		if($this->session->userdata('Level')=="4"){
+ 			$id = $this->session->userdata('No_Anggota');
+ 			$check = $this->global_model->find_by('anggota', array('No_Anggota' => $id));
+	 		$checkunit = $this->global_model->find_by('unit_kerja', array('ID_Unit' => $check['ID_Unit']));
+	 		$data['detailsimpanan'] = $this->global_model->find_all_by('simpansukarela', array('No_Anggota' => $id));
+	 		$data['noanggota']  = $check['No_Anggota'];
+	 		$data['nik']  = $check['NIK'];
+	 		$data['namaanggota']  = $check['Nama_Anggota'];
+	 		$data['unit']  = $checkunit['Unit_Kerja'];
+
+			//load view
+	 		$this->load->view('head/dashboard/index');
+	 		$this->load->view('konten/simpanansukarela/detail',$data);
+	 		$this->load->view('footer/dashboard/index');
+ 		}else{
+ 			$data['simpansukarela'] = $this->global_model->query('select *from simpansukarela group by No_Anggota');
+	 		$data['anggota'] = $this->global_model->find_all('anggota');
+			//load view
+	 		$this->load->view('head/dashboard/index');
+	 		$this->load->view('konten/simpanansukarela/index',$data);
+	 		$this->load->view('footer/dashboard/index');
+ 		}
 
  	}
 

@@ -29,6 +29,9 @@ class Simpananpokok extends CI_Controller {
 
  	public function index(){
  		$data['simpanpokok'] = $this->global_model->query('select *from simpanpokok');
+ 		if($this->session->userdata('Level')=="4"){
+ 			$data['simpanpokok'] = $this->global_model->query("select *from simpanpokok where No_Anggota='".$this->session->userdata('No_Anggota')."'");
+ 		}
  		$data['anggota'] = $this->global_model->find_all('anggota');
 		//load view
  		$this->load->view('head/dashboard/index');

@@ -7,7 +7,11 @@
               <div class="title_right">
                 <div class="form-group pull-right">
                   <div class="input-group">
+                  <?php if($this->session->userdata('Level')=="4"){ ?>
+                    <a href="<?php echo base_url();?>index.php/simpanansukarela/cetak/<?php echo $this->session->userdata('No_Anggota');?>" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> Cetak</a>
+                  <?php }else {?>  
                     <a href="<?php echo base_url();?>index.php/simpanansukarela/cetak/<?php echo $this->uri->segment(3);?>" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> Cetak</a>
+                  <?php } ?>
                   </div>
                 </div>
               </div>
@@ -66,7 +70,7 @@
                       <!-- Table row -->
                       <div class="row">
                         <div class="col-xs-12 table">
-                          <table class="table table-striped table-bordered">
+                          <table id="datatable" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th>No</th>

@@ -92,6 +92,17 @@
                     </ul>
                   </li>
                 <?php } ?>
+                <?php if($this->session->userdata('Level')=="4"){ ?>
+                  <li><a href="<?php echo base_url();?>index.php/dashboard"><i class="fa fa-home"></i> Dashboard</a></li>
+                  <li><a><i class="fa fa-file"></i> Simpanan <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo base_url();?>index.php/simpananwajib">Simpanan Wajib</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/simpananpokok">Simpanan Pokok</a></li>
+                      <li><a href="<?php echo base_url();?>index.php/simpanansukarela">Simpanan Sukarela</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="<?php echo base_url();?>index.php/pinjaman"><i class="fa fa-clipboard"></i> Pinjaman</a></li>
+                <?php } ?>
                 </ul>
               </div>
             </div>

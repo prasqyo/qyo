@@ -8,7 +8,9 @@
                 <div class="form-group pull-right">
                   <div class="input-group">
                     <a href="<?php echo base_url();?>index.php/simpananpokok/cetak" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</a>
+                    <?php if($this->session->userdata('Level')=="1" || $this->session->userdata('Level')=="3"){ ?>
                     <button class="pengaturanbutton btn btn-success"><i class="fa fa-pencil"></i> Edit nominal simpanan</button>
+                    <?php }?>
                   </div>
                 </div>
               </div>
@@ -20,7 +22,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_content">
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table <?php if($this->session->userdata('Level')=="1" || $this->session->userdata('Level')=="3"){ ?>id="datatable"<?php }?> class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>Kode Transaksi</th>
