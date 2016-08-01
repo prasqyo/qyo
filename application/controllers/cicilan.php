@@ -66,8 +66,24 @@ class Cicilan extends CI_Controller {
 			$data = $this->input->post();
 			$data['kode_cicilan'] = $a;
 			unset($data['simpan']);
-			$this->global_model->create('cicilan',$data);
-			$this->message('success','Data berhasil di tambah','indexcicilan');
+			
+			$datacheck = array(
+				'nominal' => $this->input->post('nominal'),
+				'jangka_waktu' => $this->input->post('jangka_waktu'),
+				'nominal_cicilan' => $this->input->post('nominal_cicilan'));
+
+			$check = count($this->global_model->find_by('cicilan',$datacheck));
+			if($this->input->post('nominal')==""){
+				$this->message('error','Nominal tidak boleh kosong','indexcicilan');
+			}else if($this->input->post('nominal_cicilan')==""){
+				$this->message('error','Nominal perbulan tidak boleh kosong','indexcicilan');
+			}else if($check > 0){
+				$this->message('error','Data tersebut sudah tersedia','indexcicilan');
+			}else{
+				$this->global_model->create('cicilan',$data);
+				$this->message('success','Data berhasil di tambah','indexcicilan');
+			}
+
 			redirect(site_url('cicilan'));
 		}
 		
@@ -77,8 +93,24 @@ class Cicilan extends CI_Controller {
 		if($this->input->post('simpan')){
 			$data = $this->input->post();
 			unset($data['simpan']);
-			$this->global_model->update('cicilan',$data, array('kode_cicilan' => $id));
-			$this->message('success','Data berhasil di edit','indexcicilan');
+
+			$datacheck = array(
+				'nominal' => $this->input->post('nominal'),
+				'jangka_waktu' => $this->input->post('jangka_waktu'),
+				'nominal_cicilan' => $this->input->post('nominal_cicilan'));
+
+			$check = count($this->global_model->find_by('cicilan',$datacheck));
+			if($this->input->post('nominal')==""){
+				$this->message('error','Nominal tidak boleh kosong','indexcicilan');
+			}else if($this->input->post('nominal_cicilan')==""){
+				$this->message('error','Nominal perbulan tidak boleh kosong','indexcicilan');
+			}else if($check > 0){
+				$this->message('error','Data tersebut sudah tersedia','indexcicilan');
+			}else{
+				$this->global_model->update('cicilan',$data, array('kode_cicilan' => $id));
+				$this->message('success','Data berhasil di edit','indexcicilan');
+			}
+
 			redirect(site_url('cicilan'));
 		}
 	}

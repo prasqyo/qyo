@@ -83,7 +83,7 @@
                     <div class="modal-body">
                       <div class="form-group">
                         <label>Nominal</label>
-                        <input type="text" name="nominal" class="form-control" id="nominaltambah">
+                        <input type="text" name="nominal" class="form-control" id="nominaltambah" required>
                       </div>
                       <div class="form-group">
                         <label>Jangka Waktu (Tahun)</label>
@@ -97,7 +97,7 @@
                       </div>
                       <div class="form-group">
                         <label>Nominal Perbulan</label>
-                        <input type="text" name="nominal_cicilan" class="form-control" id="nominalperbulantambah">
+                        <input type="text" name="nominal_cicilan" class="form-control" id="nominalperbulantambah" required>
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -120,11 +120,11 @@
                     <div class="modal-body">
                       <div class="form-group">
                         <label>Nominal</label>
-                        <input type="text" name="nominal" class="form-control" id="nominaledit">
+                        <input type="text" name="nominal" class="form-control" id="nominaledit" required>
                       </div>
                       <div class="form-group">
                         <label>Jangka Waktu (Tahun)</label>
-                        <select class="form-control" name="jangka_waktu" id="jangkawaktuedit">
+                        <select class="form-control" name="jangka_waktu" id="jangkawaktuedit" >
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
@@ -134,7 +134,7 @@
                       </div>
                       <div class="form-group">
                         <label>Nominal Perbulan</label>
-                        <input type="text" name="nominal_cicilan" class="form-control" id="nominalperbulanedit">
+                        <input type="text" name="nominal_cicilan" class="form-control" id="nominalperbulanedit" required>
                       </div>
                     </div>
                     <div class="modal-footer">
