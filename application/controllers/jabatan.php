@@ -66,8 +66,18 @@ class Jabatan extends CI_Controller {
 			$data = $this->input->post();
 			$data['Kode_Jabatan'] = $a;
 			unset($data['simpan']);
-			$this->global_model->create('jabatan',$data);
-			$this->message('success','Data berhasil di tambah','indexjabatan');
+
+			$check = count($this->global_model->find_by('jabatan', array('Jabatan' => $this->input->post('Jabatan'))));
+
+			if($this->input->post('Jabatan')==""){
+				$this->message('error','Nama jabatan tidak boleh kosong','indexjabatan');
+			}else if($check > 0){
+				$this->message('error','Nama jabatan sudah tersedia','indexjabatan');
+			}else{
+				$this->global_model->create('jabatan',$data);
+				$this->message('success','Data berhasil di tambah','indexjabatan');
+			}
+
 			redirect(site_url('jabatan'));
 		}
 		
@@ -77,8 +87,17 @@ class Jabatan extends CI_Controller {
 		if($this->input->post('simpan')){
 			$data = $this->input->post();
 			unset($data['simpan']);
-			$this->global_model->update('jabatan',$data, array('Kode_Jabatan' => $id));
-			$this->message('success','Data berhasil di edit','indexjabatan');
+
+			$check = count($this->global_model->find_by('jabatan', array('Jabatan' => $this->input->post('Jabatan'))));
+
+			if($this->input->post('Jabatan')==""){
+				$this->message('error','Nama jabatan tidak boleh kosong','indexjabatan');
+			}else if($check > 0){
+				$this->message('error','Nama jabatan sudah tersedia','indexjabatan');
+			}else{
+				$this->global_model->update('jabatan',$data, array('Kode_Jabatan' => $id));
+				$this->message('success','Data berhasil di edit','indexjabatan');
+			}
 			redirect(site_url('jabatan'));
 		}
 	}

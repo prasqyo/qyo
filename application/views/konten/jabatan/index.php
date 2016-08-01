@@ -79,7 +79,7 @@
                     <div class="modal-body">
                       <div class="form-group">
                         <label>Nama Jabatan</label>
-                        <input type="text" name="Jabatan" class="form-control" id="namatambah">
+                        <input type="text" name="Jabatan" class="form-control" id="namatambah" required>
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -102,7 +102,7 @@
                     <div class="modal-body">
                       <div class="form-group">
                         <label>Jabatan</label>
-                        <input type="text" name="Jabatan" class="form-control" id="namaedit">
+                        <input type="text" name="Jabatan" class="form-control" id="namaedit" required>
                       </div>
                     </div>
                     <div class="modal-footer">
